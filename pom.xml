@@ -11,4 +11,16 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>uaa.tif.Tif</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.3.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+        </dependency>
+    </dependencies>    
 </project>
