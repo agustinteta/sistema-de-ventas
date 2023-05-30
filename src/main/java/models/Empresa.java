@@ -1,12 +1,23 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "empresa")
 public class Empresa {
-    
+
     //atributos
+    @Id
+    @Column(name = "idEmpresa")
     private int id;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "razon_social")
     private String razon_social;
+    @Column(name = "direccion")
     private String direccion;
 
     public int getId() {
@@ -45,7 +56,5 @@ public class Empresa {
     public String toString() {
         return "Empresa{" + "id=" + id + ", nombre=" + nombre + '}';
     }
-    
-    
-    
+
 }
