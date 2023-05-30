@@ -1,31 +1,46 @@
 package models;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "empresa")
-public class Empresa {
+@Table(name = "EMPRESA")
+public class Empresa implements Serializable {
 
     //atributos
+    private static final long serialVersionUID = 1L;
+    
     @Id
-    @Column(name = "idEmpresa")
-    private int id;
-    @Column(name = "nombre")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "idEmpresa", updatable = false, nullable = false, unique = true)
+    private int idEmpresa;
+    @Column(name = "nombre", length = 50)
     private String nombre;
-    @Column(name = "razon_social")
+    @Column(name = "razon_social", length = 50)
     private String razon_social;
-    @Column(name = "direccion")
+    @Column(name = "direccion", length = 100)
     private String direccion;
+    
+    public Empresa(){}
 
-    public int getId() {
-        return id;
+    public Empresa(String nombre, String razon_social, String direccion) {
+        this.nombre = nombre;
+        this.razon_social = razon_social;
+        this.direccion = direccion;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return idEmpresa;
+    }
+
+    public void setId(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public String getNombre() {
@@ -54,7 +69,7 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "Empresa{" + "idEmpresa=" + idEmpresa + ", nombre=" + nombre + '}';
     }
 
 }

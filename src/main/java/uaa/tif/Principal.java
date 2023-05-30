@@ -9,10 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import models.Empresa;
 
-public class Tif {
+public class Principal {
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myConnectionDB");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager em = emf.createEntityManager();
 
         Empresa e = em.find(Empresa.class, 1);
