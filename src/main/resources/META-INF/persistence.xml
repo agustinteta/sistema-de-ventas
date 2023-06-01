@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemalocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="BDD">
-        <class>models.Empresa</class>
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <properties>
-            <!-- Hibernate properties -->
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <!-- Configuring JDBC properties -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistema_de_proveedores?useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.password" value="12345"/>
-        </properties>
-    </persistence-unit>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="BDD">
+    <!-- Clases -->
+    <class>models.Empresa</class>
+    <class>models.Cliente</class>
+    <class>models.Proveedor</class>
+    <class>models.Producto</class>
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <properties>
+      <!-- Hibernate properties -->
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <!-- Configuring JDBC properties -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ucaz85algufi3mov:7qZuzijNOL4rmreUnah7@bhwnekzjzdrwyudqswwr-mysql.services.clever-cloud.com:3306/bhwnekzjzdrwyudqswwr"/>
+      <property name="javax.persistence.jdbc.user" value="ucaz85algufi3mov"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="7qZuzijNOL4rmreUnah7"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
 </persistence>

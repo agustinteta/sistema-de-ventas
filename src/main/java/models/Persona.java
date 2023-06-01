@@ -1,36 +1,34 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-@Entity 
-@Table(name="persona")
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona {
-    
+
     //atributos
-    private int id;
+    @Column(name = "nombre", length = 50)
     private String nombre;
+    @Column(name = "apellido", length = 50)
     private String apellido;
+    @Column(name = "identificacion", length = 50)
     private String identificacion;
+    @Column(name = "celular", length = 50)
     private String celular;
+    @Column(name = "correo", length = 50)
     private String correo;
 
+    public Persona(){}
+    
     public Persona(String nombre, String apellido, String identificacion, String celular, String correo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.identificacion = identificacion;
         this.celular = celular;
         this.correo = correo;
-    }
-    
-    
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -75,9 +73,7 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + '}';
+        return "Persona{nombre=" + nombre + ", apellido=" + apellido + '}';
     }
 
-    
-    
 }

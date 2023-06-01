@@ -1,13 +1,33 @@
 package models;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Usuario extends Persona{
-    
+@Entity
+@Table(name = "USUARIO")
+public class Usuario extends Persona implements Serializable {
+
     //atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCliente", updatable = false, nullable = false, unique = true)
+    private int idUsuario;
+    @Column(name = "nombre_usuario", length = 50)
     private String nombre_usuario;
+    @Column(name = "password", length = 50)
     private String password;
+    @Column(name = "tipo_usuario")
     private TipoUsuario tipo_usuario;
+    @Column(name = "punto_de_venta")
     private PuntoDeVenta punto_de_venta;
+
+    public Usuario() {
+    }
 
     public Usuario(String nombre_usuario, String password, TipoUsuario tipo_usuario, PuntoDeVenta punto_de_venta, String nombre, String apellido, String identificacion, String celular, String correo) {
         super(nombre, apellido, identificacion, celular, correo);
@@ -15,6 +35,11 @@ public class Usuario extends Persona{
         this.password = password;
         this.tipo_usuario = tipo_usuario;
         this.punto_de_venta = punto_de_venta;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + "nombre=" + getNombre() +'}';
     }
 
     public String getNombre_usuario() {
@@ -48,7 +73,5 @@ public class Usuario extends Persona{
     public void setPunto_de_venta(PuntoDeVenta punto_de_venta) {
         this.punto_de_venta = punto_de_venta;
     }
-    
-    
-    
+
 }
