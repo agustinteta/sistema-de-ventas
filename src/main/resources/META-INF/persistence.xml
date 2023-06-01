@@ -2,11 +2,12 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="BDD">
     <!-- Clases -->
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>models.Empresa</class>
     <class>models.Cliente</class>
     <class>models.Proveedor</class>
     <class>models.Producto</class>
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>models.Item</class>
     <properties>
       <!-- Hibernate properties -->
       <property name="hibernate.show_sql" value="true"/>

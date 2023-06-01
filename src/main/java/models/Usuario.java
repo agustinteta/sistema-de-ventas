@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +23,11 @@ public class Usuario extends Persona implements Serializable {
     private String nombre_usuario;
     @Column(name = "password", length = 50)
     private String password;
-    @Column(name = "tipo_usuario")
+    @JoinColumn(name = "tipo_usuario")
+    @OneToMany
     private TipoUsuario tipo_usuario;
-    @Column(name = "punto_de_venta")
+    @OneToMany
+    @JoinColumn(name = "punto_de_venta")
     private PuntoDeVenta punto_de_venta;
 
     public Usuario() {

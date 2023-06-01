@@ -1,19 +1,43 @@
 package models;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-public class Item {
+@Entity
+@Table(name="ITEM")
+public class Item implements Serializable {
     
     //atributos
-    private int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "idItem", updatable = false, nullable = false, unique = true)
+    private int idItem;
+    @JoinColumn(name = "idProducto")
+    @OneToOne
     private Producto producto;
+    @Column(name="cantidad")
     private int cantidad;
 
+    public Item(){}
+
+    public Item(Producto producto, int cantidad) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+    }    
+    
     public int getId() {
-        return id;
+        return idItem;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idItem) {
+        this.idItem = idItem;
     }
 
     public Producto getProducto() {
@@ -34,7 +58,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + '}';
+        return "Item{" + "id=" + idItem + ", producto=" + producto + ", cantidad=" + cantidad + '}';
     }
     
     

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,15 +19,16 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProducto", updatable = false, nullable = false, unique = true)
     private int idProducto;
-    @JoinColumn
+    @JoinColumn(name = "idProveedor")
+    @ManyToOne
     private Proveedor proveedor;
-    @Column
+    @Column(name = "nombre")
     private String nombre;
-    @Column
+    @Column(name = "descripcion")
     private String descripcion;
-    @Column
+    @Column(name = "stock")
     private int stock;
-    @Column
+    @Column(name = "precio")
     private double precio;
 
     public Producto() {
