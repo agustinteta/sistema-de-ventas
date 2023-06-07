@@ -1,19 +1,34 @@
 package models;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class TipoOrden {
+@Entity
+@Table(name = "TIPO_ORDEN")
+public class TipoOrden implements Serializable {
     
     //atributos
-    private int id;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idTipoOrden", updatable = false, nullable = false, unique = true)
+    private int idTipoOrden;
+    @Column(name = "nombre", length = 50)
     private String nombre;
+    @Column(name = "descripcion", length = 250)
     private String descripcion;
 
     public int getId() {
-        return id;
+        return idTipoOrden;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idTipoOrden) {
+        this.idTipoOrden = idTipoOrden;
     }
 
     public String getNombre() {
@@ -34,7 +49,7 @@ public class TipoOrden {
 
     @Override
     public String toString() {
-        return "TipoOrden{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "TipoOrden{" + "id=" + idTipoOrden + ", nombre=" + nombre + '}';
     }
     
     
