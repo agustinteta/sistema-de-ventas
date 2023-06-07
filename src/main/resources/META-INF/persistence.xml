@@ -3,11 +3,16 @@
   <persistence-unit name="BDD">
     <!-- Clases -->
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>models.Empresa</class>
     <class>models.Cliente</class>
-    <class>models.Proveedor</class>
+    <class>models.Empresa</class>
     <class>models.Producto</class>
-    <class>models.Item</class>
+    <class>models.Proveedor</class>
+    <class>models.PuntoDeVenta</class>
+    <class>models.TipoOrden</class>
+    <class>models.TipoUsuario</class>
+    <class>models.Usuario</class>
+    <class>models.OrdenDeVenta</class>
+    <class>models.OrdenItem</class>
     <properties>
       <!-- Hibernate properties -->
       <property name="hibernate.show_sql" value="true"/>

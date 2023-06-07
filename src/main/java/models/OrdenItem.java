@@ -1,37 +1,40 @@
 package models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ITEM")
-public class Item implements Serializable {
-    
+@Table(name = "ORDEN_ITEM")
+public class OrdenItem implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     //atributos
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idItem", updatable = false, nullable = false, unique = true)
     private int idItem;
     @JoinColumn(name = "idProducto")
-    @OneToOne
-    private Producto producto;
-    @Column(name="cantidad")
+    @ManyToMany
+    private List<Producto> producto;
+    @Column(name = "cantidad")
     private int cantidad;
 
-    public Item(){}
+    public OrdenItem() {
+    }
 
-    public Item(Producto producto, int cantidad) {
-        this.producto = producto;
+    public OrdenItem(Producto producto, int cantidad) {
+        this.producto = (List<Producto>) producto;
         this.cantidad = cantidad;
-    }    
-    
+    }
+
     public int getId() {
         return idItem;
     }
@@ -41,11 +44,11 @@ public class Item implements Serializable {
     }
 
     public Producto getProducto() {
-        return producto;
+        return (Producto) producto;
     }
 
     public void setProducto(Producto producto) {
-        this.producto = producto;
+        this.producto = (List<Producto>) producto;
     }
 
     public int getCantidad() {
@@ -60,6 +63,5 @@ public class Item implements Serializable {
     public String toString() {
         return "Item{" + "id=" + idItem + ", producto=" + producto + ", cantidad=" + cantidad + '}';
     }
-    
-    
+
 }

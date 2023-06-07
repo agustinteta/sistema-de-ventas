@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 public class Usuario extends Persona implements Serializable {
 
     //atributos
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCliente", updatable = false, nullable = false, unique = true)
@@ -23,12 +25,12 @@ public class Usuario extends Persona implements Serializable {
     private String nombre_usuario;
     @Column(name = "password", length = 50)
     private String password;
-    @JoinColumn(name = "tipo_usuario")
+    @JoinColumn(name = "idTipoUsuario")
     @OneToMany
-    private TipoUsuario tipo_usuario;
+    private List<TipoUsuario> tipo_usuario;
     @OneToMany
-    @JoinColumn(name = "punto_de_venta")
-    private PuntoDeVenta punto_de_venta;
+    @JoinColumn(name = "idPuntoDeVenta")
+    private List<PuntoDeVenta> punto_de_venta;
 
     public Usuario() {
     }
@@ -37,8 +39,8 @@ public class Usuario extends Persona implements Serializable {
         super(nombre, apellido, identificacion, celular, correo);
         this.nombre_usuario = nombre_usuario;
         this.password = password;
-        this.tipo_usuario = tipo_usuario;
-        this.punto_de_venta = punto_de_venta;
+        this.tipo_usuario = (List<TipoUsuario>) tipo_usuario;
+        this.punto_de_venta = (List<PuntoDeVenta>) punto_de_venta;
     }
 
     @Override
@@ -63,19 +65,19 @@ public class Usuario extends Persona implements Serializable {
     }
 
     public TipoUsuario getTipo_usuario() {
-        return tipo_usuario;
+        return (TipoUsuario) tipo_usuario;
     }
 
     public void setTipo_usuario(TipoUsuario tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
+        this.tipo_usuario = (List<TipoUsuario>) tipo_usuario;
     }
 
     public PuntoDeVenta getPunto_de_venta() {
-        return punto_de_venta;
+        return (PuntoDeVenta) punto_de_venta;
     }
 
     public void setPunto_de_venta(PuntoDeVenta punto_de_venta) {
-        this.punto_de_venta = punto_de_venta;
+        this.punto_de_venta = (List<PuntoDeVenta>) punto_de_venta;
     }
 
 }

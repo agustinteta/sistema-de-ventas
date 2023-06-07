@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Table(name = "CLIENTE")
 public class Cliente extends Persona implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCliente", updatable = false, nullable = false, unique = true)
