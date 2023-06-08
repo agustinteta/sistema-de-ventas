@@ -4,6 +4,8 @@
  */
 package views;
 
+import models.Usuario;
+
 /**
  *
  * @author Usuario01
@@ -53,6 +55,8 @@ public class registros extends javax.swing.JFrame {
         JSparaTipoUs = new javax.swing.JSeparator();
         jBtnVolver = new javax.swing.JButton();
         jBtnRegistrarse = new javax.swing.JButton();
+        jLabelApellido = new javax.swing.JLabel();
+        jTextApellido = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,7 +90,7 @@ public class registros extends javax.swing.JFrame {
         jLabelNomYap.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNomYap.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
         jLabelNomYap.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNomYap.setText("Nombre y Apellido");
+        jLabelNomYap.setText("Nombre");
 
         jTextNomYap.setBackground(new java.awt.Color(1, 112, 100));
         jTextNomYap.setBorder(null);
@@ -155,6 +159,19 @@ public class registros extends javax.swing.JFrame {
             }
         });
 
+        jLabelApellido.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelApellido.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        jLabelApellido.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelApellido.setText("Apellido");
+
+        jTextApellido.setBackground(new java.awt.Color(1, 112, 100));
+        jTextApellido.setBorder(null);
+        jTextApellido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextApellidoMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
@@ -177,8 +194,6 @@ public class registros extends javax.swing.JFrame {
                             .addComponent(jSeparatorUsuario)
                             .addComponent(jPasscontrasenia)
                             .addComponent(jSeparatorContrasenia)
-                            .addComponent(jLabelNomYap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextNomYap)
                             .addComponent(jSeparNomYap)
                             .addComponent(jTextCorreo)
                             .addComponent(jSeparaCorreo)
@@ -191,7 +206,15 @@ public class registros extends javax.swing.JFrame {
                             .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelTipoUs, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboUs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JSparaTipoUs))))
+                            .addComponent(JSparaTipoUs)
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextNomYap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(jLabelNomYap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         fondoLayout.setVerticalGroup(
@@ -200,10 +223,17 @@ public class registros extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabelRegistro)
                 .addGap(39, 39, 39)
-                .addComponent(jLabelNomYap)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNomYap)
+                    .addComponent(jLabelApellido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextNomYap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addComponent(jTextNomYap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                        .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparNomYap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelDNI)
@@ -231,7 +261,7 @@ public class registros extends javax.swing.JFrame {
                 .addComponent(jSeparatorUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTipoUs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jComboUs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(JSparaTipoUs, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +293,20 @@ public class registros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarseActionPerformed
+        String nombre = jTextNomYap.getText();
+        String apellido = jTextApellido.getText();
+        String dni = jTextDNI.getText();
+        String correo = jTextCorreo.getText();
+        String telefono = jTextTelefono.getText();
+        String nombre_usuario = jTextNomUs.getText();
+        String password = new String(jPasscontrasenia.getPassword());
         
+        Usuario u = new Usuario(nombre_usuario, password, nombre, apellido, dni, telefono, correo);
+        if(u.agregarUsuario(u)){
+            this.dispose();
+            Login f2 = new Login();
+            f2.setVisible(true);
+        }
     }//GEN-LAST:event_jBtnRegistrarseActionPerformed
 
     private void jBtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVolverActionPerformed
@@ -286,6 +329,10 @@ public class registros extends javax.swing.JFrame {
     private void jComboUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboUsActionPerformed
+
+    private void jTextApellidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextApellidoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextApellidoMousePressed
 
     /**
      * @param args the command line arguments
@@ -328,6 +375,7 @@ public class registros extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRegistrarse;
     private javax.swing.JButton jBtnVolver;
     private javax.swing.JComboBox<String> jComboUs;
+    private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelContrasenia;
     private javax.swing.JLabel jLabelCorreo;
     private javax.swing.JLabel jLabelDNI;
@@ -343,6 +391,7 @@ public class registros extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparaTelefono;
     private javax.swing.JSeparator jSeparatorContrasenia;
     private javax.swing.JSeparator jSeparatorUsuario;
+    private javax.swing.JTextField jTextApellido;
     private javax.swing.JTextField jTextCorreo;
     private javax.swing.JTextField jTextDNI;
     private javax.swing.JTextField jTextNomUs;

@@ -5,6 +5,7 @@
 package views;
 
 import java.awt.Color;
+import models.Usuario;
 
 /**
  *
@@ -199,7 +200,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        String usuario = txtUsuario.getText();
+        String password = new String(txtPassword.getPassword());
+        
+        Usuario u = new Usuario();
+        u.validarUsuario(usuario, password);
+        
+        System.out.println(usuario + password);
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
    
