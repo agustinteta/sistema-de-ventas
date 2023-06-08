@@ -125,15 +125,56 @@ public class Usuario extends Persona implements Serializable {
 
         try {
             manager.getTransaction().begin();
-            manager.persist(u);
-            manager.getTransaction().commit();
-            System.out.println("USUARIO AGREGADO");
-            return true;
+            if(u.validarIdentificacion(u.getIdentificacion()) && u.validadNombreUsuario(u.getNombre_usuario())){
+                manager.persist(u);
+                manager.getTransaction().commit();
+                System.out.println("USUARIO AGREGADO");
+                return true;
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fallo durante el registro de usuario, vuelva a intentarlo");
             manager.getTransaction().rollback();
+        }
+        return false;
+    }
+
+    public boolean validarIdentificacion(String identificacion) {
+        System.out.println("VALIDACION DE IDENTIFICACION.");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
+        EntityManager manager = emf.createEntityManager();
+        try {
+            TypedQuery<Usuario> query = manager.createQuery("SELECT u FROM Usuario u WHERE u.identificacion = :identificacion", Usuario.class);
+            query.setParameter("identificacion", identificacion);
+            List<Usuario> resultados = query.getResultList();
+
+            if(resultados.isEmpty())
+                return true;
+            else
+                JOptionPane.showMessageDialog(null, "El numero de identificacion que se ingreso corresponde a otro usuario.");
+            return false;
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Fallo la validacion de identificacion." + e);
             return false;
         }
     }
+    
+    public boolean validadNombreUsuario(String nombre_usuario){
+        System.out.println("VALIDACION DE NOMBRE DE USUARIO.");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
+        EntityManager manager = emf.createEntityManager();
+        try {
+            TypedQuery<Usuario> query = manager.createQuery("SELECT u FROM Usuario u WHERE u.nombre_usuario = :nombre_usuario", Usuario.class);
+            query.setParameter("nombre_usuario", nombre_usuario);
+            List<Usuario> resultados = query.getResultList();
 
+            if(resultados.isEmpty())
+                return true;
+            else
+                JOptionPane.showMessageDialog(null, "El nombre de usuario corresponde a otro usuario.");
+            return false;
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Fallo la validacion de nombre de usuario." + e);
+            return false;
+        }
+    }
 }
