@@ -153,7 +153,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnRegistro)
                     .addComponent(jButton4))
-                .addGap(43, 43, 43))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

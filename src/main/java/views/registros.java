@@ -75,7 +75,7 @@ public class registros extends javax.swing.JFrame {
         jTextNomUs.setBackground(new java.awt.Color(1, 112, 100));
         jTextNomUs.setBorder(null);
 
-        jSeparatorUsuario.setBackground(new java.awt.Color(10, 173, 186));
+        jSeparatorUsuario.setBackground(new java.awt.Color(1, 132, 122));
 
         jLabelContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelContrasenia.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
@@ -85,7 +85,7 @@ public class registros extends javax.swing.JFrame {
         jPasscontrasenia.setBackground(new java.awt.Color(1, 112, 100));
         jPasscontrasenia.setBorder(null);
 
-        jSeparatorContrasenia.setBackground(new java.awt.Color(10, 173, 186));
+        jSeparatorContrasenia.setBackground(new java.awt.Color(1, 132, 122));
 
         jLabelNomYap.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNomYap.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
@@ -100,7 +100,7 @@ public class registros extends javax.swing.JFrame {
             }
         });
 
-        jSeparNomYap.setBackground(new java.awt.Color(10, 173, 186));
+        jSeparNomYap.setBackground(new java.awt.Color(1, 132, 122));
 
         jLabelCorreo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelCorreo.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
@@ -110,7 +110,7 @@ public class registros extends javax.swing.JFrame {
         jTextCorreo.setBackground(new java.awt.Color(1, 112, 100));
         jTextCorreo.setBorder(null);
 
-        jSeparaCorreo.setBackground(new java.awt.Color(10, 173, 186));
+        jSeparaCorreo.setBackground(new java.awt.Color(1, 132, 122));
 
         jLabelTelefono.setBackground(new java.awt.Color(255, 255, 255));
         jLabelTelefono.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
@@ -125,13 +125,15 @@ public class registros extends javax.swing.JFrame {
             }
         });
 
-        jSeparaTelefono.setBackground(new java.awt.Color(10, 173, 186));
+        jSeparaTelefono.setBackground(new java.awt.Color(1, 132, 122));
 
         jLabelDNI.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDNI.setText("DNI");
 
         jTextDNI.setBackground(new java.awt.Color(1, 112, 100));
         jTextDNI.setBorder(null);
+
+        jSeparaDNI.setBackground(new java.awt.Color(1, 132, 122));
 
         jLabelTipoUs.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTipoUs.setText("Tipo de Usuario");
@@ -142,6 +144,8 @@ public class registros extends javax.swing.JFrame {
                 jComboUsActionPerformed(evt);
             }
         });
+
+        JSparaTipoUs.setBackground(new java.awt.Color(1, 132, 122));
 
         jBtnVolver.setBackground(new java.awt.Color(1, 130, 160));
         jBtnVolver.setText("Volver");

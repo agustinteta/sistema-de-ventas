@@ -202,7 +202,7 @@
         <Component class="javax.swing.JSeparator" name="jSeparatorUsuario">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ba" green="ad" red="a" type="rgb"/>
+              <Color blue="7a" green="84" red="1" type="rgb"/>
             </Property>
           </Properties>
         </Component>
@@ -233,7 +233,7 @@
         <Component class="javax.swing.JSeparator" name="jSeparatorContrasenia">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ba" green="ad" red="a" type="rgb"/>
+              <Color blue="7a" green="84" red="1" type="rgb"/>
             </Property>
           </Properties>
         </Component>
@@ -267,7 +267,7 @@
         <Component class="javax.swing.JSeparator" name="jSeparNomYap">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ba" green="ad" red="a" type="rgb"/>
+              <Color blue="7a" green="84" red="1" type="rgb"/>
             </Property>
           </Properties>
         </Component>
@@ -298,7 +298,7 @@
         <Component class="javax.swing.JSeparator" name="jSeparaCorreo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ba" green="ad" red="a" type="rgb"/>
+              <Color blue="7a" green="84" red="1" type="rgb"/>
             </Property>
           </Properties>
         </Component>
@@ -332,7 +332,7 @@
         <Component class="javax.swing.JSeparator" name="jSeparaTelefono">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ba" green="ad" red="a" type="rgb"/>
+              <Color blue="7a" green="84" red="1" type="rgb"/>
             </Property>
           </Properties>
         </Component>
@@ -355,6 +355,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparaDNI">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="7a" green="84" red="1" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelTipoUs">
           <Properties>
@@ -383,6 +388,11 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JSeparator" name="JSparaTipoUs">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="7a" green="84" red="1" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jBtnVolver">
           <Properties>
