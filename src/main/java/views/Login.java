@@ -6,6 +6,7 @@ package views;
 
 import java.awt.Color;
 import models.Usuario;
+import controller.ControladorUsuario;
 
 /**
  *
@@ -172,7 +173,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jBtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistroActionPerformed
         this.setVisible(false);
-        registros f1 = new registros();
+        UsuarioRegistro f1 = new UsuarioRegistro();
         f1.setVisible(true);
         
     }//GEN-LAST:event_jBtnRegistroActionPerformed
@@ -200,13 +201,18 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ControladorUsuario controlador = new ControladorUsuario();
+        
         String usuario = txtUsuario.getText();
         String password = new String(txtPassword.getPassword());
         
-        Usuario u = new Usuario();
-        u.validarUsuario(usuario, password);
         
-        System.out.println(usuario + password);
+        if(controlador.validarUsuario(usuario, password)){
+            this.dispose();
+            menuPrincipal m = new menuPrincipal();
+            m.setVisible(true);
+        }
+        
         
     }//GEN-LAST:event_jButton4ActionPerformed
 

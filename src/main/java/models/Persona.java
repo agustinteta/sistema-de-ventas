@@ -14,11 +14,11 @@ public abstract class Persona {
     private String nombre;
     @Column(name = "apellido", length = 50)
     private String apellido;
-    @Column(name = "identificacion", length = 50)
+    @Column(name = "identificacion", length = 50, unique=true)
     private String identificacion;
     @Column(name = "celular", length = 50)
     private String celular;
-    @Column(name = "correo", length = 50)
+    @Column(name = "correo", length = 50, unique=true)
     private String correo;
 
     public Persona(){}

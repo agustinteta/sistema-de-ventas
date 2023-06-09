@@ -372,19 +372,14 @@
         <Component class="javax.swing.JComboBox" name="jComboUs">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Vendedor"/>
-                <StringItem index="1" value="Servicio tecnico"/>
-                <StringItem index="2" value="Administrador"/>
-                <StringItem index="3" value=" "/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboUsActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TipoUsuario&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JSeparator" name="JSparaTipoUs">

@@ -4,6 +4,13 @@
  */
 package views;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import models.Producto;
+import models.Proveedor;
+
 /**
  *
  * @author Usuario01
@@ -15,6 +22,7 @@ public class VentanaProductos extends javax.swing.JFrame {
      */
     public VentanaProductos() {
         initComponents();
+        cargarComboBox();
     }
 
     /**
@@ -47,10 +55,8 @@ public class VentanaProductos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabelCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jLabelCodigo.setText("Codigo");
 
-        jLabelNombre.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNombre.setText("Nombre");
 
         jComboBoxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedor 1", "Proveedor 2", "Proveedor 3", " " }));
@@ -60,13 +66,10 @@ public class VentanaProductos extends javax.swing.JFrame {
             }
         });
 
-        jLabelProveedor.setForeground(new java.awt.Color(0, 0, 0));
         jLabelProveedor.setText("Proveedor");
 
-        jLabelPrecio.setForeground(new java.awt.Color(0, 0, 0));
         jLabelPrecio.setText("Precio");
 
-        jLabelStock.setForeground(new java.awt.Color(0, 0, 0));
         jLabelStock.setText("Stock");
 
         jTxtStock.addActionListener(new java.awt.event.ActionListener() {
@@ -84,14 +87,12 @@ public class VentanaProductos extends javax.swing.JFrame {
         jBtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoEliminar.png"))); // NOI18N
         jBtnEliminar.setText("Eliminar");
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Proveedor", "Precio", "Stock"
+                "Codigo", "Nombre", "Proveedor", "Precio", "Stock"
             }
         ));
         tabla.setViewportView(jTable1);
@@ -185,6 +186,19 @@ public class VentanaProductos extends javax.swing.JFrame {
     private void jTxtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtStockActionPerformed
+
+    private void cargarComboBox() {
+        EntityManager manager;
+        EntityManagerFactory emf;
+        emf = Persistence.createEntityManagerFactory("BDD");
+        manager = emf.createEntityManager();
+
+        List<Proveedor> proveedores = (List<Proveedor>) manager.createQuery("SELECT p FROM Proveedor p").getResultList();
+        for (Proveedor proveedor : proveedores) {
+            String item = proveedor.getIdProveedor() + " - " + proveedor.getNombre();
+            this.jComboBoxProveedor.addItem(item);
+        }
+    }
 
     /**
      * @param args the command line arguments

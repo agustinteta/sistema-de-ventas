@@ -10,7 +10,6 @@ import models.Proveedor;
 public class TestProductos {
 
     private static EntityManager manager;
-
     private static EntityManagerFactory emf;
 
     public static void main(String[] args) {

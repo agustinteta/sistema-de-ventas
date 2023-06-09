@@ -23,6 +23,13 @@ public class TipoOrden implements Serializable {
     @Column(name = "descripcion", length = 250)
     private String descripcion;
 
+    public TipoOrden(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    
+    public TipoOrden(){}
+
     public int getId() {
         return idTipoOrden;
     }

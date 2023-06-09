@@ -5,20 +5,28 @@
 package views;
 
 import models.Usuario;
+import controller.ControladorUsuario;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.DefaultComboBoxModel;
+import models.TipoUsuario;
 
 /**
  *
  * @author Usuario01
  */
-public class registros extends javax.swing.JFrame {
+public class UsuarioRegistro extends javax.swing.JFrame {
 
     /**
      * Creates new form registros
      */
-    public registros() {
+    public UsuarioRegistro() {
         initComponents();
+        cargarComboBox();
         this.setLocationRelativeTo(this);
-        
+
     }
 
     /**
@@ -138,7 +146,6 @@ public class registros extends javax.swing.JFrame {
         jLabelTipoUs.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTipoUs.setText("Tipo de Usuario");
 
-        jComboUs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendedor", "Servicio tecnico", "Administrador", " " }));
         jComboUs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboUsActionPerformed(evt);
@@ -297,6 +304,8 @@ public class registros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarseActionPerformed
+        ControladorUsuario controlador = new ControladorUsuario();
+
         String nombre = jTextNomYap.getText();
         String apellido = jTextApellido.getText();
         String dni = jTextDNI.getText();
@@ -304,9 +313,10 @@ public class registros extends javax.swing.JFrame {
         String telefono = jTextTelefono.getText();
         String nombre_usuario = jTextNomUs.getText();
         String password = new String(jPasscontrasenia.getPassword());
-        
-        Usuario u = new Usuario(nombre_usuario, password, nombre, apellido, dni, telefono, correo);
-        if(u.agregarUsuario(u)){
+        TipoUsuario tipo_u = (TipoUsuario) jComboUs.getSelectedItem();
+                
+
+        if (controlador.agregarUsuario(nombre_usuario, password, tipo_u, nombre, apellido, dni, telefono, correo)) {
             this.dispose();
             Login f2 = new Login();
             f2.setVisible(true);
@@ -317,13 +327,13 @@ public class registros extends javax.swing.JFrame {
         this.setVisible(false);
         Login f2 = new Login();
         f2.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_jBtnVolverActionPerformed
 
     private void jTextNomYapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextNomYapMousePressed
-        
-        
+
+
     }//GEN-LAST:event_jTextNomYapMousePressed
 
     private void jTextTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTelefonoActionPerformed
@@ -337,6 +347,21 @@ public class registros extends javax.swing.JFrame {
     private void jTextApellidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextApellidoMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextApellidoMousePressed
+    private void cargarComboBox() {
+        EntityManager manager;
+        EntityManagerFactory emf;
+        emf = Persistence.createEntityManagerFactory("BDD");
+        manager = emf.createEntityManager();
+        
+        DefaultComboBoxModel<TipoUsuario> comboBoxModel = new DefaultComboBoxModel<>();
+
+        List<TipoUsuario> resultados = (List<TipoUsuario>) manager.createQuery("SELECT t FROM TipoUsuario t").getResultList();
+        for (TipoUsuario tipo_u : resultados) {
+            comboBoxModel.addElement(tipo_u);
+        }
+        jComboUs.setModel(comboBoxModel);
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -355,20 +380,21 @@ public class registros extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registros().setVisible(true);
+                new UsuarioRegistro().setVisible(true);
             }
         });
     }
@@ -378,7 +404,7 @@ public class registros extends javax.swing.JFrame {
     private javax.swing.JPanel fondo;
     private javax.swing.JButton jBtnRegistrarse;
     private javax.swing.JButton jBtnVolver;
-    private javax.swing.JComboBox<String> jComboUs;
+    private javax.swing.JComboBox<TipoUsuario> jComboUs;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelContrasenia;
     private javax.swing.JLabel jLabelCorreo;

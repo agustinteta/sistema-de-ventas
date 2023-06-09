@@ -21,6 +21,13 @@ public class TipoUsuario implements Serializable {
     @Column(name = "nombre", length = 50)
     private String nombre;
 
+    public TipoUsuario(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public TipoUsuario(){}
+    
     public int getId() {
         return idTipoUsuario;
     }
@@ -48,7 +55,7 @@ public class TipoUsuario implements Serializable {
 
     @Override
     public String toString() {
-        return "TipoUsuario{" + "id=" + idTipoUsuario + ", nombre=" + nombre + '}';
+        return idTipoUsuario + " - " + nombre;
     }
     
     

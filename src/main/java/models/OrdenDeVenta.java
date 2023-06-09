@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,8 +29,8 @@ public class OrdenDeVenta implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha_creacion;
     @JoinColumn(name = "idTipoOrden")
-    @OneToMany
-    private List<TipoOrden> tipo;
+    @ManyToOne
+    private TipoOrden tipo;
     @JoinColumn(name = "idPuntoDeVenta")
     @ManyToOne
     private PuntoDeVenta punto_de_venta;
@@ -41,18 +40,18 @@ public class OrdenDeVenta implements Serializable {
     @Column(name = "precio_total")
     private double precio_total;
     @JoinColumn(name = "idCliente")
-    @OneToMany
-    private List<Cliente> cliente;
+    @ManyToOne
+    private Cliente cliente;
     
     public OrdenDeVenta(){}
 
     public OrdenDeVenta(Date fecha_creacion, List<TipoOrden> tipo, PuntoDeVenta punto_de_venta, List<OrdenItem> items, double precio_total, List<Cliente> cliente) {
         this.fecha_creacion = fecha_creacion;
-        this.tipo = tipo;
+        this.tipo = (TipoOrden) tipo;
         this.punto_de_venta = punto_de_venta;
         this.items = items;
         this.precio_total = precio_total;
-        this.cliente = cliente;
+        this.cliente = (Cliente) cliente;
     }
 
     public int getId() {
@@ -71,11 +70,11 @@ public class OrdenDeVenta implements Serializable {
         this.fecha_creacion = fecha_creacion;
     }
 
-    public List<TipoOrden> getTipo() {
+    public TipoOrden getTipo() {
         return tipo;
     }
 
-    public void setTipo(List<TipoOrden> tipo) {
+    public void setTipo(TipoOrden tipo) {
         this.tipo = tipo;
     }
 
@@ -103,11 +102,11 @@ public class OrdenDeVenta implements Serializable {
         this.precio_total = precio_total;
     }
 
-    public List<Cliente> getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(List<Cliente> cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 

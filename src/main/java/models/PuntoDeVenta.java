@@ -1,14 +1,13 @@
 package models;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,13 +21,21 @@ public class PuntoDeVenta implements Serializable {
     @Column(name = "idPuntoDeVenta", updatable = false, nullable = false, unique = true)
     private int idPuntoDeVenta;
     @JoinColumn(name = "idEmpresa")
-    @OneToMany
-    private List<Empresa> empresa;
+    @ManyToOne
+    private Empresa empresa;
     @Column(name = "nombre", length = 50)
     private String nombre;
     @Column(name = "descripcion", length = 250)
     private String descripcion;
+    
+    public PuntoDeVenta(){}
 
+    public PuntoDeVenta(Empresa empresa, String nombre, String descripcion) {
+        this.empresa = empresa;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    
     public int getId() {
         return idPuntoDeVenta;
     }
@@ -38,11 +45,11 @@ public class PuntoDeVenta implements Serializable {
     }
 
     public Empresa getEmpresa() {
-        return (Empresa) empresa;
+        return  empresa;
     }
 
     public void setEmpresa(Empresa empresa) {
-        this.empresa = (List<Empresa>) empresa;
+        this.empresa = empresa;
     }
 
     public String getNombre() {
