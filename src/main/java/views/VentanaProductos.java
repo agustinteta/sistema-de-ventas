@@ -45,11 +45,11 @@ public class VentanaProductos extends javax.swing.JFrame {
         jTxtPrecio = new javax.swing.JTextField();
         jLabelStock = new javax.swing.JLabel();
         jTxtStock = new javax.swing.JTextField();
+        tabla = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jBtnGuardar = new javax.swing.JButton();
         jBtnActualizar = new javax.swing.JButton();
         jBtnEliminar = new javax.swing.JButton();
-        tabla = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,15 +78,6 @@ public class VentanaProductos extends javax.swing.JFrame {
             }
         });
 
-        jBtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoGuardar.png"))); // NOI18N
-        jBtnGuardar.setText("Agregar");
-
-        jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoActualizar.png"))); // NOI18N
-        jBtnActualizar.setText("Actualizar");
-
-        jBtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoEliminar.png"))); // NOI18N
-        jBtnEliminar.setText("Eliminar");
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -96,6 +87,18 @@ public class VentanaProductos extends javax.swing.JFrame {
             }
         ));
         tabla.setViewportView(jTable1);
+
+        jBtnGuardar.setBackground(new java.awt.Color(0, 153, 51));
+        jBtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnGuardar.setText("Guardar");
+
+        jBtnActualizar.setBackground(new java.awt.Color(0, 102, 153));
+        jBtnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnActualizar.setText("Actualizar");
+
+        jBtnEliminar.setBackground(new java.awt.Color(255, 0, 0));
+        jBtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnEliminar.setText("Eliminar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,14 +158,14 @@ public class VentanaProductos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelStock)
                     .addComponent(jTxtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jBtnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnActualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(tabla, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
