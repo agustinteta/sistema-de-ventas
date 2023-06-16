@@ -37,9 +37,10 @@ public class ControladorUsuario {
             manager.persist(usuario);
             manager.getTransaction().commit();
             System.out.println("USUARIO AGREGADO");
+            manager.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error en el registro de usuario: "+e);
+            JOptionPane.showMessageDialog(null, "Error en el registro de usuario: " + e);
             manager.getTransaction().rollback();
         }
         return false;
@@ -70,4 +71,57 @@ public class ControladorUsuario {
         return false;
     }
 
+    public Usuario buscarUsuario(int idUsuario) {
+        System.out.println("BUSCAR PROVEEDOR: " + idUsuario);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
+        EntityManager manager = emf.createEntityManager();
+        Usuario user = null;
+
+        try {
+            manager.getTransaction().begin();
+            user = manager.find(Usuario.class, idUsuario);
+            manager.getTransaction().commit();
+            manager.close();
+            return user;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se encontro ningun proveedor con el id proporcionado. " + e);
+            return user;
+        }
+    }
+
+    public void actualizarUsuario(int idUsuario, String nombre, String apellido, String identificacion, String celular, String correo) {
+        System.out.println("ACTUALIZAR USUARIO: " + idUsuario);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
+        EntityManager manager = emf.createEntityManager();
+        try {
+            manager.getTransaction().begin();
+            Usuario user = manager.find(Usuario.class, idUsuario);
+            user.setNombre(nombre);
+            user.setApellido(apellido);
+            user.setIdentificacion(identificacion);
+            user.setCelular(celular);
+            user.setCorreo(correo);
+            manager.getTransaction().commit();
+            manager.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar actualizar." + e);
+            manager.getTransaction().rollback();
+        }
+    }
+
+    public void eliminarUsuario(int idUsuario) {
+        System.out.println("ELIMINAR USUARIO: " + idUsuario);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
+        EntityManager manager = emf.createEntityManager();
+        try {
+            manager.getTransaction().begin();
+            Usuario user = manager.find(Usuario.class, idUsuario);
+            manager.remove(user);
+            manager.getTransaction().commit();
+            manager.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar" + e);
+            manager.getTransaction().rollback();
+        }
+    }
 }
