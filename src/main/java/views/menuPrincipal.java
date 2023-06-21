@@ -1,22 +1,30 @@
-
 package views;
+
+import controller.ControladorUsuario;
 import models.Usuario;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-   
+    private Usuario usuario;
+    private ControladorUsuario controladorUsuario = new ControladorUsuario();
+
     public MenuPrincipal(Usuario user) {
         initComponents();
         this.setLocationRelativeTo(this);
-        cargarInfo(user);
+        usuario = user;
+        cargarInfo(usuario);
     }
-    
-    public void cargarInfo(Usuario user){
+
+    public void cargarInfo(Usuario user) {
         jLabelNomApe.setText(user.getNombre() + " " + user.getApellido());
         jLabelTipoUsuario.setText(user.getTipo_usuario().getNombre());
-        jLabelPOS.setText(user.getPunto_de_venta().getNombre());
+        if (user.getPunto_de_venta() == null) {
+            jLabelPOS.setText("-");
+        }else{
+            jLabelPOS.setText(user.getPunto_de_venta().getNombre());
+        }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -210,46 +218,48 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:0
         dispose();
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        VentanaNuevaVenta venta = new VentanaNuevaVenta();
+
+        VentanaNuevaVenta venta = new VentanaNuevaVenta(usuario);
+
         venta.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         VentanaUsuarios us = new VentanaUsuarios();
         us.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:3
         VentanaClientes cliente = new VentanaClientes();
-        
+
         cliente.setVisible(true);
-                
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         VentanaProveedor proveedor = new VentanaProveedor();
         proveedor.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         VentanaProductos producto = new VentanaProductos();
         producto.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**

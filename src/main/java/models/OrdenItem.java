@@ -1,14 +1,14 @@
 package models;
 
 import java.io.Serializable;
-import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,18 +21,30 @@ public class OrdenItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idItem", updatable = false, nullable = false, unique = true)
     private int idItem;
+    
+    @JoinColumn(name = "idOrdenDeVenta")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private OrdenDeVenta orden;
+    
     @JoinColumn(name = "idProducto")
-    @ManyToMany
-    private List<Producto> producto;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Producto producto;
+    
     @Column(name = "cantidad")
     private int cantidad;
+    
+    @Column(name = "precio")
+    private double precio;
+    
 
     public OrdenItem() {
     }
 
-    public OrdenItem(Producto producto, int cantidad) {
-        this.producto = (List<Producto>) producto;
+    public OrdenItem(Producto producto, OrdenDeVenta orden, int cantidad, double precio) {
+        this.producto = producto;
+        this.orden = orden;
         this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     public int getId() {
@@ -44,11 +56,11 @@ public class OrdenItem implements Serializable {
     }
 
     public Producto getProducto() {
-        return (Producto) producto;
+        return producto;
     }
 
     public void setProducto(Producto producto) {
-        this.producto = (List<Producto>) producto;
+        this.producto = producto;
     }
 
     public int getCantidad() {
@@ -59,9 +71,30 @@ public class OrdenItem implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public OrdenDeVenta getOrden() {
+        return orden;
+    }
+
+    public void setOrden(OrdenDeVenta orden) {
+        this.orden = orden;
+    }
+
+    public int getIdItem() {
+        return idItem;
+    }
+
+    
     @Override
     public String toString() {
-        return "Item{" + "id=" + idItem + ", producto=" + producto + ", cantidad=" + cantidad + '}';
+        return "OrdenItem{" + "idItem=" + idItem + ", producto=" + producto + ", cantidad=" + cantidad + ", precio=" + precio + '}';
     }
 
 }

@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import models.OrdenItem;
 import models.Producto;
+import controller.ControladorOrdenDeVenta;
+import models.OrdenDeVenta;
 
 
 
@@ -14,6 +16,7 @@ public class TestItem {
     private static EntityManager manager;
     
     private static EntityManagerFactory emf;
+    private static ControladorOrdenDeVenta controladorOrden = new ControladorOrdenDeVenta();
 
     public static void main(String[] args) {
         emf = Persistence.createEntityManagerFactory("BDD");
@@ -21,7 +24,8 @@ public class TestItem {
         
         //CREAR UN ITEM PARA UNA ORDEN
         Producto producto = manager.find(Producto.class, 1);
-        OrdenItem item = new OrdenItem(producto, 3);
+        OrdenDeVenta orden = controladorOrden.obtenerUltimaOrden();
+        OrdenItem item = new OrdenItem(producto, orden, 3, 100);
         manager.getTransaction().begin();
         manager.persist(item);
         manager.getTransaction().commit();
