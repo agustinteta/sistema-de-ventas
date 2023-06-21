@@ -20,7 +20,7 @@ public class ConfiguracionInicial {
                 p = new Proveedor("Juan", "Perez", "11122233", "12345678", "proveedor@proveedores.com"),
                 p1 = new Proveedor("Roman", "Riquelme", "33222111", "87654321", "proveedor.cabj@proveedores.com"),
                 new PuntoDeVenta(e, "Stand principal", "Stand de la entrada para atencion al publico."),
-                new PuntoDeVenta(e, "Servicio Tecnico", "Taller de servicio tecnico."),
+                new PuntoDeVenta(e, "Taller de reparaciones", "Taller de servicio tecnico."),
                 new TipoUsuario("Vendedor", "Empleado que se encarga de la atencion al publico"),
                 new TipoUsuario("Servicio Tecnico", "Empleado que se encarga de reparaciones en el area de Servicio Tecnico"),
                 new TipoUsuario("Administrador", "Administrador del sistema"),

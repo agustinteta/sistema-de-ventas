@@ -7,6 +7,7 @@ package views;
 import java.awt.Color;
 import models.Usuario;
 import controller.ControladorUsuario;
+import services.PasswordEncryptor;
 
 /**
  *
@@ -202,10 +203,12 @@ public class Login extends javax.swing.JFrame {
 
         String usuario = txtUsuario.getText();
         String password = new String(txtPassword.getPassword());
+        PasswordEncryptor pe = new PasswordEncryptor();
+        String encrypted_password = pe.encryptPassword(password);
         
-        if(controladorUsuario.validarUsuario(usuario, password)){
+        if(controladorUsuario.validarUsuario(usuario, encrypted_password)){
             this.dispose();
-            Usuario user = controladorUsuario.obtenerUsuarioNombre(usuario, password);
+            Usuario user = controladorUsuario.obtenerUsuarioNombre(usuario, encrypted_password);
             MenuPrincipal m = new MenuPrincipal(user);
             m.setVisible(true);
         }

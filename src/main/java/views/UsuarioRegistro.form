@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="fondo" min="-2" max="-2" attributes="0"/>
+          <Component id="fondo" alignment="1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -54,41 +54,46 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jBtnVolver" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="160" max="32767" attributes="0"/>
-                                  <Component id="jBtnRegistrarse" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabelNomUs" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelContrasenia" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="jTextNomUs" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jSeparatorUsuario" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jPasscontrasenia" max="32767" attributes="0"/>
-                              <Component id="jSeparatorContrasenia" max="32767" attributes="0"/>
-                              <Component id="jSeparNomYap" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextCorreo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jSeparaCorreo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabelTelefono" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                              <Component id="jTextTelefono" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jSeparaTelefono" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabelDNI" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
-                              <Component id="jTextDNI" max="32767" attributes="0"/>
-                              <Component id="jSeparaDNI" max="32767" attributes="0"/>
-                              <Component id="jLabelCorreo" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                              <Component id="jLabelTipoUs" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                              <Component id="jComboUs" max="32767" attributes="0"/>
-                              <Component id="JSparaTipoUs" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jTextNomYap" alignment="0" pref="155" max="32767" attributes="0"/>
-                                      <Component id="jLabelNomYap" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelTipoUs1" min="-2" pref="119" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jBtnVolver" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="160" max="32767" attributes="0"/>
+                                      <Component id="jBtnRegistrarse" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelApellido" min="-2" pref="155" max="-2" attributes="0"/>
-                                      <Component id="jTextApellido" pref="158" max="32767" attributes="0"/>
+                                  <Component id="jLabelNomUs" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelContrasenia" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="jTextNomUs" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSeparatorUsuario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jPasscontrasenia" max="32767" attributes="0"/>
+                                  <Component id="jSeparatorContrasenia" max="32767" attributes="0"/>
+                                  <Component id="jSeparNomYap" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextCorreo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSeparaCorreo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabelTelefono" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                                  <Component id="jTextTelefono" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSeparaTelefono" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabelDNI" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                                  <Component id="jTextDNI" max="32767" attributes="0"/>
+                                  <Component id="jSeparaDNI" max="32767" attributes="0"/>
+                                  <Component id="jLabelCorreo" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="jLabelTipoUs" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="jComboUs" max="32767" attributes="0"/>
+                                  <Component id="JSparaTipoUs" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jTextNomYap" alignment="0" pref="155" max="32767" attributes="0"/>
+                                          <Component id="jLabelNomYap" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelApellido" min="-2" pref="155" max="-2" attributes="0"/>
+                                          <Component id="jTextApellido" pref="158" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <Component id="JSparaTipoUs1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jComboPOS" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -145,17 +150,23 @@
                   <Component id="jSeparatorUsuario" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelTipoUs" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jComboUs" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="JSparaTipoUs1" min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelTipoUs1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboPOS" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="JSparaTipoUs" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelContrasenia" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPasscontrasenia" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparatorContrasenia" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jBtnVolver" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBtnRegistrarse" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -437,6 +448,34 @@
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextApellidoMousePressed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="JSparaTipoUs1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="7a" green="84" red="1" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelTipoUs1">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Punto de Venta"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboPOS">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboPOSActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;PuntoDeVenta&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

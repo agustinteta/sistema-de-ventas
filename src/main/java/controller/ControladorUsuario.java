@@ -19,15 +19,16 @@ public class ControladorUsuario {
         usuario = new Usuario();
     }
 
-    public boolean agregarUsuario(String nombre_usuario, String password, TipoUsuario tipo_usuario, String nombre, String apellido, String identificacion, String celular, String correo) {
+    public boolean agregarUsuario(String nombre_usuario, String password, TipoUsuario tipo_usuario, PuntoDeVenta pos, String nombre, String apellido, String identificacion, String celular, String correo) {
         usuario.setNombre_usuario(nombre_usuario);
         usuario.setPassword(password);
+        usuario.setTipo_usuario(tipo_usuario);
+        usuario.setPunto_de_venta(pos);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setIdentificacion(identificacion);
         usuario.setCelular(celular);
         usuario.setCorreo(correo);
-        usuario.setTipo_usuario(tipo_usuario);
 
         System.out.println("AGREGAR USUARIO :");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");

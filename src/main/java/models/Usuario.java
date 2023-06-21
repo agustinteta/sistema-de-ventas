@@ -22,7 +22,7 @@ public class Usuario extends Persona implements Serializable {
     private int idUsuario;
     @Column(name = "nombre_usuario", length = 50, unique = true)
     private String nombre_usuario;
-    @Column(name = "password", length = 50)
+    @Column(name = "password", length = 300)
     private String password;
     @ManyToOne
     @JoinColumn(name = "idTipoUsuario")
