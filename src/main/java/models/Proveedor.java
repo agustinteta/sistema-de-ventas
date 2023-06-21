@@ -33,7 +33,7 @@ public class Proveedor extends Persona implements Serializable{
 
     @Override
     public String toString() {
-        return "Proveedor{" + "idProveedor=" + idProveedor + '}';
-    }
+        return idProveedor + " - " + super.getNombre();
+    } 
     
 }

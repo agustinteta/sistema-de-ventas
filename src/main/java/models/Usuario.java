@@ -86,4 +86,8 @@ public class Usuario extends Persona implements Serializable {
         this.punto_de_venta = punto_de_venta;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
 }

@@ -70,7 +70,7 @@ public class PuntoDeVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "PuntoDeVenta{" + "id=" + idPuntoDeVenta + ", empresa=" + empresa + ", nombre=" + nombre + '}';
+        return idPuntoDeVenta + " - " + nombre;
     }
 
 }

@@ -14,9 +14,7 @@ import controller.ControladorUsuario;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form intento3
-     */
+    private ControladorUsuario controladorUsuario = new ControladorUsuario();
     public Login() {
         initComponents();
         
@@ -201,15 +199,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ControladorUsuario controlador = new ControladorUsuario();
-        
+
         String usuario = txtUsuario.getText();
         String password = new String(txtPassword.getPassword());
         
-        
-        if(controlador.validarUsuario(usuario, password)){
+        if(controladorUsuario.validarUsuario(usuario, password)){
             this.dispose();
-            menuPrincipal m = new menuPrincipal();
+            Usuario user = controladorUsuario.obtenerUsuarioNombre(usuario, password);
+            MenuPrincipal m = new MenuPrincipal(user);
             m.setVisible(true);
         }
         
