@@ -16,10 +16,11 @@ import services.PasswordEncryptor;
 public class Login extends javax.swing.JFrame {
 
     private ControladorUsuario controladorUsuario = new ControladorUsuario();
+
     public Login() {
         initComponents();
-        
-       this.setLocationRelativeTo(this);
+        this.setTitle("Sistema de ventas - Login");
+        this.setLocationRelativeTo(this);
     }
 
     /**
@@ -174,7 +175,7 @@ public class Login extends javax.swing.JFrame {
         this.setVisible(false);
         UsuarioRegistro f1 = new UsuarioRegistro();
         f1.setVisible(true);
-        
+
     }//GEN-LAST:event_jBtnRegistroActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -182,17 +183,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
-           
-            txtUsuario.setForeground(Color.black);
-              
-            txtPassword.setForeground(Color.BLACK);
+
+        txtUsuario.setForeground(Color.black);
+
+        txtPassword.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtUsuarioMousePressed
 
     private void txtPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMousePressed
-            
-            txtUsuario.setForeground(Color.black);
-           
-            txtPassword.setForeground(Color.BLACK);
+
+        txtUsuario.setForeground(Color.black);
+
+        txtPassword.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtPasswordMousePressed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
@@ -205,18 +206,17 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
         PasswordEncryptor pe = new PasswordEncryptor();
         String encrypted_password = pe.encryptPassword(password);
-        
-        if(controladorUsuario.validarUsuario(usuario, encrypted_password)){
+
+        if (controladorUsuario.validarUsuario(usuario, encrypted_password)) {
             this.dispose();
             Usuario user = controladorUsuario.obtenerUsuarioNombre(usuario, encrypted_password);
             MenuPrincipal m = new MenuPrincipal(user);
             m.setVisible(true);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel fondo;

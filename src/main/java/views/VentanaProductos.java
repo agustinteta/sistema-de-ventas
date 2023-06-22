@@ -18,6 +18,9 @@ public class VentanaProductos extends javax.swing.JFrame {
         initComponents();
         cargarTabla();
         cargarComboBoxProveedor();
+        this.setLocationRelativeTo(this);
+        this.setTitle("Sistema de ventas - Modulo de Productos");
+
     }
 
     private void cargarTabla() {

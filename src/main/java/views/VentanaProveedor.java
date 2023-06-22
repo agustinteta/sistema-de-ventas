@@ -11,8 +11,9 @@ public class VentanaProveedor extends javax.swing.JFrame {
 
     public VentanaProveedor() {
         initComponents();
-
+        this.setLocationRelativeTo(this);
         cargarTabla();
+        this.setTitle("Sistema de ventas - Modulo de Proveedor");
     }
 
     private void cargarTabla() {
@@ -24,7 +25,7 @@ public class VentanaProveedor extends javax.swing.JFrame {
             }
         };
         for (Proveedor p : proveedores) {
-            model.addRow(new Object[]{p.getIdProveedor(), p.getIdentificacion(), p.getNombre(), p.getCelular(), p.getCorreo()});
+            model.addRow(new Object[]{p.getIdProveedor(), p.getIdentificacion(), p.getNombre(), p.getApellido(), p.getCelular(), p.getCorreo()});
         }
         jTable1.setModel(model);
     }

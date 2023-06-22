@@ -29,6 +29,7 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         cargarComboBox();
         cargarComboBoxPOS();
         this.setLocationRelativeTo(this);
+        this.setTitle("Sistema de ventas - Formulario de Registro");
 
     }
 
@@ -344,7 +345,6 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         PuntoDeVenta pos = (PuntoDeVenta) jComboPOS.getSelectedItem();
         PasswordEncryptor pe = new PasswordEncryptor();
         String encrypted_password = pe.encryptPassword(password);
-                
 
         if (controlador.agregarUsuario(nombre_usuario, encrypted_password, tipo_u, pos, nombre, apellido, dni, telefono, correo)) {
             this.dispose();
@@ -386,7 +386,7 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         EntityManagerFactory emf;
         emf = Persistence.createEntityManagerFactory("BDD");
         manager = emf.createEntityManager();
-        
+
         DefaultComboBoxModel<TipoUsuario> comboBoxModel = new DefaultComboBoxModel<>();
 
         List<TipoUsuario> resultados = (List<TipoUsuario>) manager.createQuery("SELECT t FROM TipoUsuario t").getResultList();
@@ -394,15 +394,15 @@ public class UsuarioRegistro extends javax.swing.JFrame {
             comboBoxModel.addElement(tipo_u);
         }
         jComboUs.setModel(comboBoxModel);
-        
+
     }
-    
-    private void cargarComboBoxPOS(){
+
+    private void cargarComboBoxPOS() {
         EntityManager manager;
         EntityManagerFactory emf;
         emf = Persistence.createEntityManagerFactory("BDD");
         manager = emf.createEntityManager();
-        
+
         DefaultComboBoxModel<PuntoDeVenta> comboBoxModel = new DefaultComboBoxModel<>();
 
         List<PuntoDeVenta> resultados = (List<PuntoDeVenta>) manager.createQuery("SELECT p FROM PuntoDeVenta p").getResultList();

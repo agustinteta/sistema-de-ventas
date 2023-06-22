@@ -1,4 +1,3 @@
-
 package views;
 
 import controller.ControladorUsuario;
@@ -12,16 +11,17 @@ import models.Usuario;
 import models.TipoUsuario;
 import models.PuntoDeVenta;
 
-
 public class VentanaUsuarios extends javax.swing.JFrame {
 
     private final ControladorUsuario controladorUsuario = new ControladorUsuario();
-    
+
     public VentanaUsuarios() {
         initComponents();
         cargarTabla();
         cargarComboBoxTipoUsuario();
         cargarComboPOS();
+        this.setLocationRelativeTo(this);
+        this.setTitle("Sistema de ventas - Modulo de Usuarios");
     }
 
     private void cargarTabla() {
@@ -37,8 +37,8 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         }
         jTable1.setModel(model);
     }
-    
-    private void limpiarCampos(){
+
+    private void limpiarCampos() {
         jTextNombre.setText("");
         jTextApellido.setText("");
         jTextDNI.setText("");
@@ -47,13 +47,13 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         jComboBoxTipoUsuario.setSelectedIndex(0);
         jComboBoxPOS.setSelectedIndex(0);
     }
-    
+
     private void cargarComboBoxTipoUsuario() {
         EntityManager manager;
         EntityManagerFactory emf;
         emf = Persistence.createEntityManagerFactory("BDD");
         manager = emf.createEntityManager();
-        
+
         DefaultComboBoxModel<TipoUsuario> comboBoxModel = new DefaultComboBoxModel<>();
 
         List<TipoUsuario> resultados = (List<TipoUsuario>) manager.createQuery("SELECT t FROM TipoUsuario t").getResultList();
@@ -61,15 +61,15 @@ public class VentanaUsuarios extends javax.swing.JFrame {
             comboBoxModel.addElement(tipo_u);
         }
         jComboBoxTipoUsuario.setModel(comboBoxModel);
-        
+
     }
-    
+
     private void cargarComboPOS() {
         EntityManager manager;
         EntityManagerFactory emf;
         emf = Persistence.createEntityManagerFactory("BDD");
         manager = emf.createEntityManager();
-        
+
         DefaultComboBoxModel<PuntoDeVenta> comboBoxModel = new DefaultComboBoxModel<>();
 
         List<PuntoDeVenta> resultados = (List<PuntoDeVenta>) manager.createQuery("SELECT p FROM PuntoDeVenta p").getResultList();
@@ -77,8 +77,9 @@ public class VentanaUsuarios extends javax.swing.JFrame {
             comboBoxModel.addElement(p);
         }
         jComboBoxPOS.setModel(comboBoxModel);
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -291,7 +292,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         int column = 0;
         int row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, column).toString();
-        
+
         String nombre = jTextNombre.getText();
         String apellido = jTextApellido.getText();
         String dni = jTextDNI.getText();
@@ -299,7 +300,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         String celular = jTextCelular.getText();
         TipoUsuario tipo_usuario = (TipoUsuario) jComboBoxTipoUsuario.getSelectedItem();
         PuntoDeVenta pos = (PuntoDeVenta) jComboBoxPOS.getSelectedItem();
-        
+
         controladorUsuario.actualizarUsuario(Integer.parseInt(value), nombre, apellido, dni, celular, correo, tipo_usuario, pos);
         cargarTabla();
         limpiarCampos();
@@ -309,13 +310,12 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         int column = 0;
         int row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, column).toString();
-        
+
         controladorUsuario.eliminarUsuario(Integer.parseInt(value));
         cargarTabla();
         limpiarCampos();
     }//GEN-LAST:event_jBtnEliminarActionPerformed
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

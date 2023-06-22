@@ -13,6 +13,9 @@ public class VentanaClientes extends javax.swing.JFrame {
     public VentanaClientes() {
         initComponents();
         cargarTabla();
+        this.setLocationRelativeTo(this);
+        this.setTitle("Sistema de ventas - Modulo Clientes");
+
     }
 
     private void cargarTabla() {
@@ -28,8 +31,8 @@ public class VentanaClientes extends javax.swing.JFrame {
         }
         jTable1.setModel(model);
     }
-    
-    private void limpiarCampos(){
+
+    private void limpiarCampos() {
         jTextNombre.setText("");
         jTextApellido.setText("");
         jTextDNI.setText("");
@@ -229,7 +232,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         String dni = jTextDNI.getText();
         String correo = jTextCorreo.getText();
         String celular = jTextCelular.getText();
-        
+
         controladorCliente.agregarCliente(nombre, apellido, dni, celular, correo);
         cargarTabla();
         limpiarCampos();
@@ -239,7 +242,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         int column = 0;
         int row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, column).toString();
-        
+
         controladorCliente.eliminarCliente(Integer.parseInt(value));
         cargarTabla();
         limpiarCampos();

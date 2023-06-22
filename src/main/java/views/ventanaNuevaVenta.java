@@ -40,6 +40,9 @@ public class VentanaNuevaVenta extends javax.swing.JFrame {
         cargarComboBoxTipoOrden();
         usuario = user;
         jLabelVendedor.setText(usuario.getNombre() + " " + usuario.getApellido());
+        this.setLocationRelativeTo(this);
+        this.setTitle("Sistema de ventas - Modulo de venta");
+
     }
 
     private void cargarComboBoxTipoOrden() {
@@ -467,7 +470,7 @@ public class VentanaNuevaVenta extends javax.swing.JFrame {
         if (cantidad <= producto.getStock() && cantidad > 0) {
             controladorProducto.actualizarProducto(Integer.parseInt(idProducto), cantidad);
             agregarProductoTabla(producto, cantidad);
-            jLabelStockProd.setText(Integer.toString(producto.getStock()-cantidad));
+            jLabelStockProd.setText(Integer.toString(producto.getStock() - cantidad));
             jTxtIDProd.setText("");
             jTxtCantidad.setText("");
         } else {
@@ -488,7 +491,7 @@ public class VentanaNuevaVenta extends javax.swing.JFrame {
             TipoOrden tipoOrden = (TipoOrden) jComboBoxTipoOrden.getSelectedItem();
             Date fechaCreacion = Calendar.getInstance().getTime();
             String dni = jTxtDNI.getText();
-            if("".equals(dni)){
+            if ("".equals(dni)) {
                 JOptionPane.showMessageDialog(null, "Debe completar los datos del cliente antes de continuar");
                 return;
             }
