@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="main.java.models">
+  <ClassDiagramComponents>
+    <Class name="Cliente" package="models" visibility="public" xPosition="1475.0" yPosition="925.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idCliente" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="identificacion"/>
+          <Argument type="String" name="celular"/>
+          <Argument type="String" name="correo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdCliente" returnType="int" visibility="public"/>
+        <Method name="setIdCliente" returnType="void" visibility="public">
+          <Argument type="int" name="idCliente"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Empresa" package="models" visibility="public" xPosition="1.0" yPosition="1390.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idEmpresa" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="razon_social" type="String" visibility="private"/>
+        <Field name="direccion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="razon_social"/>
+          <Argument type="String" name="direccion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="idEmpresa"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getRazon_social" returnType="String" visibility="public"/>
+        <Method name="setRazon_social" returnType="void" visibility="public">
+          <Argument type="String" name="razon_social"/>
+        </Method>
+        <Method name="getDireccion" returnType="String" visibility="public"/>
+        <Method name="setDireccion" returnType="void" visibility="public">
+          <Argument type="String" name="direccion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="OrdenDeVenta" package="models" visibility="public" xPosition="401.0" yPosition="665.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="fecha_creacion" type="Date" visibility="private"/>
+        <Field name="tipo" type="TipoOrden" visibility="private"/>
+        <Field name="punto_de_venta" type="PuntoDeVenta" visibility="private"/>
+        <Field name="items" type="List&lt;OrdenItem&gt;" visibility="private"/>
+        <Field name="precio_total" type="double" visibility="private"/>
+        <Field name="cliente" type="Cliente" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Date" name="fecha_creacion"/>
+          <Argument type="List&lt;TipoOrden&gt;" name="tipo"/>
+          <Argument type="PuntoDeVenta" name="punto_de_venta"/>
+          <Argument type="List&lt;OrdenItem&gt;" name="items"/>
+          <Argument type="double" name="precio_total"/>
+          <Argument type="List&lt;Cliente&gt;" name="cliente"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getFecha_creacion" returnType="Date" visibility="public"/>
+        <Method name="setFecha_creacion" returnType="void" visibility="public">
+          <Argument type="Date" name="fecha_creacion"/>
+        </Method>
+        <Method name="getTipo" returnType="TipoOrden" visibility="public"/>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="TipoOrden" name="tipo"/>
+        </Method>
+        <Method name="getPunto_de_venta" returnType="PuntoDeVenta" visibility="public"/>
+        <Method name="setPunto_de_venta" returnType="void" visibility="public">
+          <Argument type="PuntoDeVenta" name="punto_de_venta"/>
+        </Method>
+        <Method name="getItems" returnType="List&lt;OrdenItem&gt;" visibility="public"/>
+        <Method name="setItems" returnType="void" visibility="public">
+          <Argument type="List&lt;OrdenItem&gt;" name="items"/>
+        </Method>
+        <Method name="getPrecio_total" returnType="double" visibility="public"/>
+        <Method name="setPrecio_total" returnType="void" visibility="public">
+          <Argument type="double" name="precio_total"/>
+        </Method>
+        <Method name="getCliente" returnType="Cliente" visibility="public"/>
+        <Method name="setCliente" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="OrdenItem" package="models" visibility="public" xPosition="741.0" yPosition="165.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idItem" type="int" visibility="private"/>
+        <Field name="producto" type="List&lt;Producto&gt;" visibility="private"/>
+        <Field name="cantidad" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Producto" name="producto"/>
+          <Argument type="int" name="cantidad"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+        <Method name="getProducto" returnType="Producto" visibility="public"/>
+        <Method name="setProducto" returnType="void" visibility="public">
+          <Argument type="Producto" name="producto"/>
+        </Method>
+        <Method name="getCantidad" returnType="int" visibility="public"/>
+        <Method name="setCantidad" returnType="void" visibility="public">
+          <Argument type="int" name="cantidad"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Persona" package="models" visibility="public" isAbstract="true" xPosition="2083.0" yPosition="824.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="identificacion" type="String" visibility="private"/>
+        <Field name="celular" type="String" visibility="private"/>
+        <Field name="correo" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="identificacion"/>
+          <Argument type="String" name="celular"/>
+          <Argument type="String" name="correo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="getIdentificacion" returnType="String" visibility="public"/>
+        <Method name="setIdentificacion" returnType="void" visibility="public">
+          <Argument type="String" name="identificacion"/>
+        </Method>
+        <Method name="getCelular" returnType="String" visibility="public"/>
+        <Method name="setCelular" returnType="void" visibility="public">
+          <Argument type="String" name="celular"/>
+        </Method>
+        <Method name="getCorreo" returnType="String" visibility="public"/>
+        <Method name="setCorreo" returnType="void" visibility="public">
+          <Argument type="String" name="correo"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Producto" package="models" visibility="public" xPosition="1338.0" yPosition="71.0">
+      <Fields>
+        <Field name="idProducto" type="int" visibility="private"/>
+        <Field name="proveedor" type="Proveedor" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
+        <Field name="stock" type="int" visibility="private"/>
+        <Field name="precio" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Proveedor" name="proveedor"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="descripcion"/>
+          <Argument type="int" name="stock"/>
+          <Argument type="double" name="precio"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="idProducto"/>
+        </Method>
+        <Method name="getProveedor" returnType="Proveedor" visibility="public"/>
+        <Method name="setProveedor" returnType="void" visibility="public">
+          <Argument type="Proveedor" name="proveedor"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="descripcion"/>
+        </Method>
+        <Method name="getStock" returnType="int" visibility="public"/>
+        <Method name="setStock" returnType="void" visibility="public">
+          <Argument type="int" name="stock"/>
+        </Method>
+        <Method name="getPrecio" returnType="double" visibility="public"/>
+        <Method name="setPrecio" returnType="void" visibility="public">
+          <Argument type="double" name="precio"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Proveedor" package="models" visibility="public" xPosition="2061.0" yPosition="214.0">
+      <Fields>
+        <Field name="idProveedor" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="identificacion"/>
+          <Argument type="String" name="celular"/>
+          <Argument type="String" name="correo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdProveedor" returnType="int" visibility="public"/>
+        <Method name="setIdProveedor" returnType="void" visibility="public">
+          <Argument type="int" name="idProveedor"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PuntoDeVenta" package="models" visibility="public" xPosition="691.0" yPosition="1468.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idPuntoDeVenta" type="int" visibility="private"/>
+        <Field name="empresa" type="Empresa" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Empresa" name="empresa"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="descripcion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="idPuntoDeVenta"/>
+        </Method>
+        <Method name="getEmpresa" returnType="Empresa" visibility="public"/>
+        <Method name="setEmpresa" returnType="void" visibility="public">
+          <Argument type="Empresa" name="empresa"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="descripcion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TipoOrden" package="models" visibility="public" xPosition="94.0" yPosition="858.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idTipoOrden" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="descripcion"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoOrden"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="descripcion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TipoUsuario" package="models" visibility="public" xPosition="2679.0" yPosition="1525.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idTipoUsuario" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="descripcion"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoUsuario"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="descripcion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Usuario" package="models" visibility="public" xPosition="1752.0" yPosition="1393.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="idUsuario" type="int" visibility="private"/>
+        <Field name="nombre_usuario" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="tipo_usuario" type="TipoUsuario" visibility="private"/>
+        <Field name="punto_de_venta" type="PuntoDeVenta" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre_usuario"/>
+          <Argument type="String" name="password"/>
+          <Argument type="TipoUsuario" name="tipo_usuario"/>
+          <Argument type="PuntoDeVenta" name="punto_de_venta"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="identificacion"/>
+          <Argument type="String" name="celular"/>
+          <Argument type="String" name="correo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre_usuario"/>
+          <Argument type="String" name="password"/>
+          <Argument type="TipoUsuario" name="tipo_usuario"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="identificacion"/>
+          <Argument type="String" name="celular"/>
+          <Argument type="String" name="correo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getNombre_usuario" returnType="String" visibility="public"/>
+        <Method name="setNombre_usuario" returnType="void" visibility="public">
+          <Argument type="String" name="nombre_usuario"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getTipo_usuario" returnType="TipoUsuario" visibility="public"/>
+        <Method name="setTipo_usuario" returnType="void" visibility="public">
+          <Argument type="TipoUsuario" name="tipo_usuario"/>
+        </Method>
+        <Method name="getPunto_de_venta" returnType="PuntoDeVenta" visibility="public"/>
+        <Method name="setPunto_de_venta" returnType="void" visibility="public">
+          <Argument type="PuntoDeVenta" name="punto_de_venta"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="models.Usuario" target="models.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tipo_usuario" source="models.Usuario" target="models.TipoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.OrdenDeVenta" target="models.OrdenItem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.Producto" target="models.Proveedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="models.Proveedor" target="models.Persona"/>
+    <HasRelation name="punto_de_venta" source="models.OrdenDeVenta" target="models.PuntoDeVenta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="punto_de_venta" source="models.Usuario" target="models.PuntoDeVenta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.OrdenDeVenta" target="models.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="models.Cliente" target="models.Persona"/>
+    <HasRelation name="cliente" source="models.OrdenDeVenta" target="models.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="proveedor" source="models.Producto" target="models.Proveedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.PuntoDeVenta" target="models.Empresa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.OrdenDeVenta" target="models.TipoOrden" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.OrdenDeVenta" target="models.PuntoDeVenta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.Usuario" target="models.PuntoDeVenta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="models.OrdenItem" target="models.Producto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="producto" source="models.OrdenItem" target="models.Producto" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Producto&gt;"/>
+    <HasRelation name="tipo" source="models.OrdenDeVenta" target="models.TipoOrden" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresa" source="models.PuntoDeVenta" target="models.Empresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="models.Usuario" target="models.Persona"/>
+    <HasRelation name="items" source="models.OrdenDeVenta" target="models.OrdenItem" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;OrdenItem&gt;"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
