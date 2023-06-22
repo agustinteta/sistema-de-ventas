@@ -27,13 +27,20 @@ public class ConfiguracionInicial {
                 new TipoOrden("A", "Tipo de orden A"),
                 new TipoOrden("B", "Tipo de orden B"),
                 new TipoOrden("C", "Tipo de orden C"),
-                new Producto(p, "Mouse Logitech", "Mouse para pc", 100, 350),
-                new Producto(p1, "Teclado Logitech", "Teclado para pc", 100, 550),
-                new Producto(p, "Monitor 24'", "Monitor con HDMI", 100, 15000),
-                new Producto(p1, "Auricular", "Auricular para pc", 100, 450),
+                new Producto(p, "Mouse Logitech", "Mouse para pc", 100, 12000),
+                new Producto(p1, "Teclado Logitech", "Teclado para pc", 100, 22000),
+                new Producto(p, "Monitor 24'", "Monitor con HDMI", 100, 55000),
+                new Producto(p1, "Auricular", "Auricular para pc", 100, 17000),
+                new Producto(p, "Memoria 16GB DDR4", "Memoria RAM de 3200mhz", 20, 32000),
+                new Producto(p1, "Barra de sonido", "Barra de sonido para pc", 5, 120000),
+                new Producto(p, "Notebook ASUS", "Notebook para estudiantes", 5, 320000),
+                new Producto(p1, "Notebook Lenovo", "Notebook para profesionales", 5, 450000),
+                new Producto(p, "Joystick PC", "Joystick generico de pc", 15, 16000),
+                new Producto(p1, "Disco SSD 240GB", "Disco SSD Gigabyte", 10, 24000),
+                new Producto(p, "Gabinete PC", "Gabinete Corsair Carbide 400c", 5, 60000),
                 new Cliente("Alfredo", "Gutierrez", "19182020", "2246303132", "alfre.gutierrez@cliente.com"),
                 new Cliente("Pedro", "Gonzales", "30333110", "2246444342", "pedro.gonzales@cliente.com"),
-                new Cliente("Rodrigo", "Teta", "43040597", "2252412502", "rodri.teta@cliente.com")
+                new Cliente("Robert John", "Downey ", "12345678", "2252412502", "ironman@cliente.com")
         );
 
         manager.getTransaction().begin();

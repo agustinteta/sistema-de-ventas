@@ -488,6 +488,10 @@ public class VentanaNuevaVenta extends javax.swing.JFrame {
             TipoOrden tipoOrden = (TipoOrden) jComboBoxTipoOrden.getSelectedItem();
             Date fechaCreacion = Calendar.getInstance().getTime();
             String dni = jTxtDNI.getText();
+            if("".equals(dni)){
+                JOptionPane.showMessageDialog(null, "Debe completar los datos del cliente antes de continuar");
+                return;
+            }
             Cliente cliente = controladorCliente.buscarClienteDNI(dni);
             if (cliente == null) {
                 String nombre = jTxtNombre.getText();
