@@ -23,11 +23,11 @@ public class OrdenItem implements Serializable {
     private int idItem;
     
     @JoinColumn(name = "idOrdenDeVenta")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OrdenDeVenta orden;
     
     @JoinColumn(name = "idProducto")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Producto producto;
     
     @Column(name = "cantidad")
@@ -94,7 +94,7 @@ public class OrdenItem implements Serializable {
     
     @Override
     public String toString() {
-        return "OrdenItem{" + "idItem=" + idItem + ", producto=" + producto + ", cantidad=" + cantidad + ", precio=" + precio + '}';
+        return producto.getNombre()+ " -  x" +cantidad+ " -  $"+precio*cantidad;
     }
 
 }

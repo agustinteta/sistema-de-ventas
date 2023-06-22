@@ -20,30 +20,37 @@ public class ControladorUsuario {
     }
 
     public boolean agregarUsuario(String nombre_usuario, String password, TipoUsuario tipo_usuario, PuntoDeVenta pos, String nombre, String apellido, String identificacion, String celular, String correo) {
-        usuario.setNombre_usuario(nombre_usuario);
-        usuario.setPassword(password);
-        usuario.setTipo_usuario(tipo_usuario);
-        usuario.setPunto_de_venta(pos);
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setIdentificacion(identificacion);
-        usuario.setCelular(celular);
-        usuario.setCorreo(correo);
+        System.out.println("AGREGAR USUARIO:");
 
-        System.out.println("AGREGAR USUARIO :");
+        Usuario user = new Usuario();
+        user.setNombre_usuario(nombre_usuario);
+        user.setPassword(password);
+        user.setTipo_usuario(tipo_usuario);
+        user.setPunto_de_venta(pos);
+        user.setNombre(nombre);
+        user.setApellido(apellido);
+        user.setIdentificacion(identificacion);
+        user.setCelular(celular);
+        user.setCorreo(correo);
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
 
         try {
             manager.getTransaction().begin();
-            manager.persist(usuario);
+            manager.persist(user);
             manager.getTransaction().commit();
             System.out.println("USUARIO AGREGADO");
-            manager.close();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en el registro de usuario: " + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return false;
     }
@@ -54,42 +61,48 @@ public class ControladorUsuario {
         EntityManager manager = emf.createEntityManager();
 
         try {
-            TypedQuery<Usuario> query = manager.createQuery("SELECT u FROM Usuario u WHERE u.nombre_usuario = :nombre_usuario AND u.password = :password", Usuario.class);
+            TypedQuery<Long> query = manager.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.nombre_usuario = :nombre_usuario AND u.password = :password", Long.class);
             query.setParameter("nombre_usuario", nombre_usuario);
             query.setParameter("password", password);
 
-            List<Usuario> resultados = query.getResultList();
+            Long count = query.getSingleResult();
 
-            if (resultados.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No se encontro ningun Usuario. Por favor registrese o reingrese las credenciales.");
-                return false; // No se encontró ningún usuario con ese nombre y apellido
+            if (count == 0) {
+                JOptionPane.showMessageDialog(null, "No se encontró ningún usuario. Por favor regístrese o reintroduzca las credenciales.");
+                return false; // No se encontró ningún usuario con ese nombre y contraseña
             } else {
                 System.out.println("USUARIO ENCONTRADO.");
-                return true; // Devuelve el primer resultado (puedes ajustarlo según tus necesidades)
+                return true;
             }
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "No se encontro ningun Usuario. Por favor registrese o reingrese las credenciales." + e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al validar el usuario: " + e);
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return false;
     }
-    
-    public Usuario obtenerUsuarioNombre(String nombre_usuario, String password){
+
+    public Usuario obtenerUsuarioNombre(String nombre_usuario, String password) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
         try {
             TypedQuery<Usuario> query = manager.createQuery("SELECT u FROM Usuario u WHERE u.nombre_usuario = :nombre_usuario AND u.password = :password", Usuario.class);
             query.setParameter("nombre_usuario", nombre_usuario);
             query.setParameter("password", password);
-
             List<Usuario> resultados = query.getResultList();
             return resultados.get(0);
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "No se encontro ningun Usuario. Por favor registrese o reingrese las credenciales." + e);
-            Usuario user = null;
-            return user;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se encontró ningún Usuario. Por favor registrese o reingrese las credenciales." + e);
+            return null;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
-    
+
     public Usuario buscarUsuario(int idUsuario) {
         System.out.println("BUSCAR USUARIO: " + idUsuario);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
@@ -97,14 +110,15 @@ public class ControladorUsuario {
         Usuario user = null;
 
         try {
-            manager.getTransaction().begin();
             user = manager.find(Usuario.class, idUsuario);
-            manager.getTransaction().commit();
-            manager.close();
             return user;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se encontro ningun proveedor con el id proporcionado. " + e);
-            return user;
+            JOptionPane.showMessageDialog(null, "No se encontró ningún usuario con el id proporcionado. " + e);
+            return null;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -123,10 +137,15 @@ public class ControladorUsuario {
             user.setTipo_usuario(tipo_usuario);
             user.setPunto_de_venta(pos);
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al intentar actualizar." + e);
-            manager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Error al intentar actualizar: " + e);
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -137,25 +156,39 @@ public class ControladorUsuario {
         try {
             manager.getTransaction().begin();
             Usuario user = manager.find(Usuario.class, idUsuario);
-            manager.remove(user);
-            manager.getTransaction().commit();
-            manager.close();
+            if (user != null) {
+                manager.remove(user);
+                manager.getTransaction().commit();
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar" + e);
-            manager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Error al eliminar: " + e);
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
-    
+
     public List<Usuario> obtenerListaUsuarios() {
+        System.out.println("OBTENER LISTA DE USUARIOS");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
         List<Usuario> resultados = null;
         try {
-            resultados = (List<Usuario>) manager.createQuery("SELECT u FROM Usuario u").getResultList();
+            TypedQuery<Usuario> query = manager.createQuery("SELECT u FROM Usuario u", Usuario.class);
+            resultados = query.getResultList();
             return resultados;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener la lista." + e);
-            return resultados;
+            JOptionPane.showMessageDialog(null, "Error al obtener la lista: " + e);
+            return null;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
+
 }

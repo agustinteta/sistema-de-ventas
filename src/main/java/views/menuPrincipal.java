@@ -1,12 +1,17 @@
 package views;
 
+import controller.ControladorProducto;
 import controller.ControladorUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+import models.Producto;
 import models.Usuario;
+import services.PDFGenerator;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    private Usuario usuario;
-    private ControladorUsuario controladorUsuario = new ControladorUsuario();
+    private final Usuario usuario;
+    private final ControladorProducto controladorProducto = new ControladorProducto();
 
     public MenuPrincipal(Usuario user) {
         initComponents();
@@ -20,7 +25,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabelTipoUsuario.setText(user.getTipo_usuario().getNombre());
         if (user.getPunto_de_venta() == null) {
             jLabelPOS.setText("-");
-        }else{
+        } else {
             jLabelPOS.setText(user.getPunto_de_venta().getNombre());
         }
     }
@@ -48,6 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -177,6 +183,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem6);
 
+        jMenuItem7.setText("Estado de Inventario");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem7);
+
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Gestion de Usuarios");
@@ -262,6 +276,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        List<Producto> productos = controladorProducto.obtenerListaProductos();
+        PDFGenerator pdf = new PDFGenerator();
+
+        try {
+            pdf.crearPDFInventario(productos);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error." + e);
+        }
+
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +347,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

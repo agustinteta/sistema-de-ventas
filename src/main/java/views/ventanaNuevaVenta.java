@@ -10,6 +10,7 @@ import controller.ControladorUsuario;
 import controller.ControladorProducto;
 import controller.ControladorOrdenItem;
 import controller.ControladorOrdenDeVenta;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,9 +21,9 @@ import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import models.PuntoDeVenta;
 import models.TipoOrden;
+import services.PDFGenerator;
 
 public class VentanaNuevaVenta extends javax.swing.JFrame {
 
@@ -464,15 +465,15 @@ public class VentanaNuevaVenta extends javax.swing.JFrame {
         int cantidad = Integer.parseInt(jTxtCantidad.getText());
 
         if (cantidad <= producto.getStock() && cantidad > 0) {
+            controladorProducto.actualizarProducto(Integer.parseInt(idProducto), cantidad);
             agregarProductoTabla(producto, cantidad);
-            controladorProducto.actualizarProducto(Integer.parseInt(idProducto), producto.getNombre(), producto.getDescripcion(), producto.getProveedor(), producto.getStock() - cantidad, producto.getPrecio());
-            producto = controladorProducto.buscarProducto(Integer.parseInt(idProducto));
-            jLabelStockProd.setText(Integer.toString(producto.getStock()));
+            jLabelStockProd.setText(Integer.toString(producto.getStock()-cantidad));
             jTxtIDProd.setText("");
             jTxtCantidad.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "La cantidad solicitada supera el stock del producto");
         }
+
     }//GEN-LAST:event_jButtonAgregarProductoActionPerformed
 
     private void jButtonGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarVentaActionPerformed
@@ -482,30 +483,41 @@ public class VentanaNuevaVenta extends javax.swing.JFrame {
         int cantidad = 0;
         double precio = 0;
         double precioTotal = Double.parseDouble(jLabelPrecioTotal.getText());
-        
-        TipoOrden tipoOrden = (TipoOrden) jComboBoxTipoOrden.getSelectedItem();
-        Date fechaCreacion = Calendar.getInstance().getTime();
-        String dni = jTxtDNI.getText();
-        Cliente cliente = controladorCliente.buscarClienteDNI(dni);
-        if (cliente == null) {
-            String nombre = jTxtNombre.getText();
-            String apellido = jTxtApellido.getText();
-            String correo = jTxtCorreo.getText();
-            String telf = jTxtTelf.getText();
-            controladorCliente.agregarCliente(nombre, apellido, dni, telf, correo);
-            cliente = controladorCliente.buscarClienteDNI(dni);
+
+        try {
+            TipoOrden tipoOrden = (TipoOrden) jComboBoxTipoOrden.getSelectedItem();
+            Date fechaCreacion = Calendar.getInstance().getTime();
+            String dni = jTxtDNI.getText();
+            Cliente cliente = controladorCliente.buscarClienteDNI(dni);
+            if (cliente == null) {
+                String nombre = jTxtNombre.getText();
+                String apellido = jTxtApellido.getText();
+                String correo = jTxtCorreo.getText();
+                String telf = jTxtTelf.getText();
+                controladorCliente.agregarCliente(nombre, apellido, dni, telf, correo);
+                cliente = controladorCliente.buscarClienteDNI(dni);
+            }
+            PuntoDeVenta pos = usuario.getPunto_de_venta();
+            controladorOrdenDeVenta.agregarOrden(fechaCreacion, tipoOrden, pos, precioTotal, cliente);
+            OrdenDeVenta orden = controladorOrdenDeVenta.obtenerUltimaOrden();
+
+            List<OrdenItem> listaItems = new ArrayList<>();
+            for (int row = 0; row < numRows; row++) {
+                idProducto = (int) jTableProductos.getValueAt(row, 0);
+                cantidad = (int) jTableProductos.getValueAt(row, 4);
+                precio = (double) jTableProductos.getValueAt(row, 3);
+                Producto producto = controladorProducto.buscarProducto(idProducto);
+                OrdenItem oi = new OrdenItem(producto, orden, cantidad, precio);
+                listaItems.add(oi);
+                controladorOrdenItem.agregarOrdenItem(producto, orden, cantidad, precio);
+            }
+            PDFGenerator pdf = new PDFGenerator();
+            pdf.crearPDFOrdenDeVenta(cliente, listaItems, usuario, orden);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la venta." + e);
+
         }
-        PuntoDeVenta pos = usuario.getPunto_de_venta();
-        controladorOrdenDeVenta.agregarOrden(fechaCreacion, tipoOrden, pos, precioTotal, cliente);
-        OrdenDeVenta orden = controladorOrdenDeVenta.obtenerUltimaOrden();
-        
-        for (int row = 0; row < numRows; row++) {
-            idProducto = (int) jTableProductos.getValueAt(row, 0);
-            cantidad = (int) jTableProductos.getValueAt(row, 4);
-            precio = (double) jTableProductos.getValueAt(row, 3);
-            Producto producto = controladorProducto.buscarProducto(idProducto);
-            controladorOrdenItem.agregarOrdenItem(producto, orden, cantidad, precio);
-        }
+
 
     }//GEN-LAST:event_jButtonGenerarVentaActionPerformed
 

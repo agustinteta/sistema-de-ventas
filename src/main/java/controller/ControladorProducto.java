@@ -7,7 +7,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
-import models.Cliente;
 import models.Producto;
 import models.Proveedor;
 
@@ -20,26 +19,32 @@ public class ControladorProducto {
     }
 
     public boolean agregarProducto(String nombre, String descripcion, Proveedor proveedor, int stock, double precio) {
-        producto.setNombre(nombre);
-        producto.setDescripcion(descripcion);
-        producto.setProveedor(proveedor);
-        producto.setStock(stock);
-        producto.setPrecio(precio);
-
         System.out.println("AGREGAR PRODUCTO:");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
 
         try {
+            Producto producto = new Producto();
+            producto.setNombre(nombre);
+            producto.setDescripcion(descripcion);
+            producto.setProveedor(proveedor);
+            producto.setStock(stock);
+            producto.setPrecio(precio);
+
             manager.getTransaction().begin();
             manager.persist(producto);
             manager.getTransaction().commit();
             System.out.println("PRODUCTO AGREGADO");
-            manager.close();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en el registro del producto: " + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return false;
     }
@@ -57,13 +62,38 @@ public class ControladorProducto {
             query.setParameter("idProducto", idProducto);
             pro = query.getSingleResult();
             manager.getTransaction().commit();
-            manager.close();
+            return pro;
         } catch (NoResultException e) {
             JOptionPane.showMessageDialog(null, "No se encontro ningun producto con el id proporcionado. " + e);
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al buscar producto por ID: " + e);
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return pro;
+    }
+
+    public void actualizarProducto(int idProducto, int cantidad) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
+        EntityManager manager = emf.createEntityManager();
+        try {
+            manager.getTransaction().begin();
+            Producto pro = manager.find(Producto.class, idProducto);
+            pro.setStock(pro.getStock() - cantidad);
+            manager.merge(pro);
+            manager.getTransaction().commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar actualizar." + e);
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
+        }
     }
 
     public void actualizarProducto(int idProducto, String nombre, String descripcion, Proveedor proveedor, int stock, double precio) {
@@ -73,16 +103,24 @@ public class ControladorProducto {
         try {
             manager.getTransaction().begin();
             Producto pro = manager.find(Producto.class, idProducto);
-            pro.setNombre(nombre);
-            pro.setDescripcion(descripcion);
-            pro.setProveedor(proveedor);
-            pro.setStock(stock);
-            pro.setPrecio(precio);
+            if (pro != null) {
+                pro.setNombre(nombre);
+                pro.setDescripcion(descripcion);
+                pro.setProveedor(proveedor);
+                pro.setStock(stock);
+                pro.setPrecio(precio);
+                manager.merge(pro);
+            }
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar actualizar." + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -93,12 +131,19 @@ public class ControladorProducto {
         try {
             manager.getTransaction().begin();
             Producto pro = manager.find(Producto.class, idProducto);
-            manager.remove(pro);
+            if (pro != null) {
+                manager.remove(pro);
+            }
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar" + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -107,12 +152,18 @@ public class ControladorProducto {
         EntityManager manager = emf.createEntityManager();
         List<Producto> resultados = null;
         try {
-            resultados = (List<Producto>) manager.createQuery("SELECT p FROM Producto p").getResultList();
+            manager.getTransaction().begin();
+            resultados = manager.createQuery("SELECT p FROM Producto p", Producto.class).getResultList();
+            manager.getTransaction().commit();
             return resultados;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al obtener la lista." + e);
-            return resultados;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
+        return resultados;
     }
 
 }

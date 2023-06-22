@@ -26,26 +26,32 @@ public class ControladorCliente {
     }
 
     public boolean agregarCliente(String nombre, String apellido, String identificacion, String celular, String correo) {
-        cliente.setNombre(nombre);
-        cliente.setApellido(apellido);
-        cliente.setIdentificacion(identificacion);
-        cliente.setCelular(celular);
-        cliente.setCorreo(correo);
-
         System.out.println("AGREGAR CLIENTE:");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
 
         try {
+            Cliente cliente = new Cliente();
+            cliente.setNombre(nombre);
+            cliente.setApellido(apellido);
+            cliente.setIdentificacion(identificacion);
+            cliente.setCelular(celular);
+            cliente.setCorreo(correo);
+
             manager.getTransaction().begin();
             manager.persist(cliente);
             manager.getTransaction().commit();
             System.out.println("CLIENTE AGREGADO");
-            manager.close();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en el registro de cliente: " + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return false;
     }
@@ -60,11 +66,14 @@ public class ControladorCliente {
             manager.getTransaction().begin();
             pro = manager.find(Cliente.class, idCliente);
             manager.getTransaction().commit();
-            manager.close();
             return pro;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se encontro ningun cliente con el id proporcionado. " + e);
             return pro;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -79,11 +88,14 @@ public class ControladorCliente {
             query.setParameter("dni", dni);
             cliente = query.getSingleResult();
             manager.getTransaction().commit();
-            manager.close();
         } catch (NoResultException e) {
             JOptionPane.showMessageDialog(null, "No se encontró ningún cliente con el DNI proporcionado.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al buscar cliente por DNI: " + e);
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return cliente;
     }
@@ -101,10 +113,15 @@ public class ControladorCliente {
             pro.setCelular(celular);
             pro.setCorreo(correo);
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar actualizar." + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -117,10 +134,15 @@ public class ControladorCliente {
             Cliente pro = manager.find(Cliente.class, idCliente);
             manager.remove(pro);
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar" + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -134,6 +156,10 @@ public class ControladorCliente {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al obtener la lista." + e);
             return resultados;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 

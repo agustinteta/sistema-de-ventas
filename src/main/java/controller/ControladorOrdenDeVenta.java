@@ -22,26 +22,32 @@ public class ControladorOrdenDeVenta {
     }
 
     public boolean agregarOrden(Date fecha_creacion, TipoOrden tipo, PuntoDeVenta punto_de_venta, double precio_total, Cliente cliente) {
-        orden.setFecha_creacion(fecha_creacion);
-        orden.setTipo((TipoOrden) tipo);
-        orden.setPunto_de_venta(punto_de_venta);
-        orden.setPrecio_total(precio_total);
-        orden.setCliente((Cliente) cliente);
-
         System.out.println("AGREGAR ORDEN DE VENTA:");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
 
         try {
+            OrdenDeVenta orden = new OrdenDeVenta();
+            orden.setFecha_creacion(fecha_creacion);
+            orden.setTipo((TipoOrden) tipo);
+            orden.setPunto_de_venta(punto_de_venta);
+            orden.setPrecio_total(precio_total);
+            orden.setCliente((Cliente) cliente);
+
             manager.getTransaction().begin();
             manager.persist(orden);
             manager.getTransaction().commit();
             System.out.println("ORDEN DE VENTA AGREGADA");
-            manager.close();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en el registro de la orden: " + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return false;
     }
@@ -58,11 +64,13 @@ public class ControladorOrdenDeVenta {
 
             ultimaOrden = query.getSingleResult();
             manager.getTransaction().commit();
-            manager.close();
             return ultimaOrden;
-
         } catch (Exception e) {
             manager.getTransaction().rollback();
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return ultimaOrden;
     }
