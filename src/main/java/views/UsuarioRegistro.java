@@ -11,7 +11,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
+import models.PuntoDeVenta;
 import models.TipoUsuario;
+import services.PasswordEncryptor;
 
 /**
  *
@@ -25,6 +27,7 @@ public class UsuarioRegistro extends javax.swing.JFrame {
     public UsuarioRegistro() {
         initComponents();
         cargarComboBox();
+        cargarComboBoxPOS();
         this.setLocationRelativeTo(this);
 
     }
@@ -65,6 +68,9 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         jBtnRegistrarse = new javax.swing.JButton();
         jLabelApellido = new javax.swing.JLabel();
         jTextApellido = new javax.swing.JTextField();
+        JSparaTipoUs1 = new javax.swing.JSeparator();
+        jLabelTipoUs1 = new javax.swing.JLabel();
+        jComboPOS = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,6 +189,17 @@ public class UsuarioRegistro extends javax.swing.JFrame {
             }
         });
 
+        JSparaTipoUs1.setBackground(new java.awt.Color(1, 132, 122));
+
+        jLabelTipoUs1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTipoUs1.setText("Punto de Venta");
+
+        jComboPOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboPOSActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
@@ -194,38 +211,42 @@ public class UsuarioRegistro extends javax.swing.JFrame {
                         .addComponent(jLabelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addComponent(jBtnVolver)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                                .addComponent(jBtnRegistrarse))
-                            .addComponent(jLabelNomUs)
-                            .addComponent(jLabelContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNomUs)
-                            .addComponent(jSeparatorUsuario)
-                            .addComponent(jPasscontrasenia)
-                            .addComponent(jSeparatorContrasenia)
-                            .addComponent(jSeparNomYap)
-                            .addComponent(jTextCorreo)
-                            .addComponent(jSeparaCorreo)
-                            .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextTelefono)
-                            .addComponent(jSeparaTelefono)
-                            .addComponent(jLabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextDNI)
-                            .addComponent(jSeparaDNI)
-                            .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelTipoUs, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboUs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JSparaTipoUs)
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextNomYap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                    .addComponent(jLabelNomYap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))))
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTipoUs1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(fondoLayout.createSequentialGroup()
+                                    .addComponent(jBtnVolver)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                                    .addComponent(jBtnRegistrarse))
+                                .addComponent(jLabelNomUs)
+                                .addComponent(jLabelContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextNomUs)
+                                .addComponent(jSeparatorUsuario)
+                                .addComponent(jPasscontrasenia)
+                                .addComponent(jSeparatorContrasenia)
+                                .addComponent(jSeparNomYap)
+                                .addComponent(jTextCorreo)
+                                .addComponent(jSeparaCorreo)
+                                .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextTelefono)
+                                .addComponent(jSeparaTelefono)
+                                .addComponent(jLabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextDNI)
+                                .addComponent(jSeparaDNI)
+                                .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelTipoUs, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboUs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(JSparaTipoUs)
+                                .addGroup(fondoLayout.createSequentialGroup()
+                                    .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextNomYap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                        .addComponent(jLabelNomYap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
+                                .addComponent(JSparaTipoUs1)
+                                .addComponent(jComboPOS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         fondoLayout.setVerticalGroup(
@@ -272,17 +293,23 @@ public class UsuarioRegistro extends javax.swing.JFrame {
                 .addComponent(jSeparatorUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTipoUs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboUs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JSparaTipoUs1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelTipoUs1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboPOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JSparaTipoUs, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelContrasenia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasscontrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparatorContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVolver)
                     .addComponent(jBtnRegistrarse))
@@ -293,7 +320,7 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,9 +341,12 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         String nombre_usuario = jTextNomUs.getText();
         String password = new String(jPasscontrasenia.getPassword());
         TipoUsuario tipo_u = (TipoUsuario) jComboUs.getSelectedItem();
+        PuntoDeVenta pos = (PuntoDeVenta) jComboPOS.getSelectedItem();
+        PasswordEncryptor pe = new PasswordEncryptor();
+        String encrypted_password = pe.encryptPassword(password);
                 
 
-        if (controlador.agregarUsuario(nombre_usuario, password, tipo_u, nombre, apellido, dni, telefono, correo)) {
+        if (controlador.agregarUsuario(nombre_usuario, encrypted_password, tipo_u, pos, nombre, apellido, dni, telefono, correo)) {
             this.dispose();
             Login f2 = new Login();
             f2.setVisible(true);
@@ -347,6 +377,10 @@ public class UsuarioRegistro extends javax.swing.JFrame {
     private void jTextApellidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextApellidoMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextApellidoMousePressed
+
+    private void jComboPOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboPOSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboPOSActionPerformed
     private void cargarComboBox() {
         EntityManager manager;
         EntityManagerFactory emf;
@@ -361,6 +395,21 @@ public class UsuarioRegistro extends javax.swing.JFrame {
         }
         jComboUs.setModel(comboBoxModel);
         
+    }
+    
+    private void cargarComboBoxPOS(){
+        EntityManager manager;
+        EntityManagerFactory emf;
+        emf = Persistence.createEntityManagerFactory("BDD");
+        manager = emf.createEntityManager();
+        
+        DefaultComboBoxModel<PuntoDeVenta> comboBoxModel = new DefaultComboBoxModel<>();
+
+        List<PuntoDeVenta> resultados = (List<PuntoDeVenta>) manager.createQuery("SELECT p FROM PuntoDeVenta p").getResultList();
+        for (PuntoDeVenta tipo_u : resultados) {
+            comboBoxModel.addElement(tipo_u);
+        }
+        jComboPOS.setModel(comboBoxModel);
     }
 
     /**
@@ -401,9 +450,11 @@ public class UsuarioRegistro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator JSparaTipoUs;
+    private javax.swing.JSeparator JSparaTipoUs1;
     private javax.swing.JPanel fondo;
     private javax.swing.JButton jBtnRegistrarse;
     private javax.swing.JButton jBtnVolver;
+    private javax.swing.JComboBox<PuntoDeVenta> jComboPOS;
     private javax.swing.JComboBox<TipoUsuario> jComboUs;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelContrasenia;
@@ -414,6 +465,7 @@ public class UsuarioRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelRegistro;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JLabel jLabelTipoUs;
+    private javax.swing.JLabel jLabelTipoUs1;
     private javax.swing.JPasswordField jPasscontrasenia;
     private javax.swing.JSeparator jSeparNomYap;
     private javax.swing.JSeparator jSeparaCorreo;

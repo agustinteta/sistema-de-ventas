@@ -16,26 +16,32 @@ public class ControladorProveedor {
     }
 
     public boolean agregarProveedor(String nombre, String apellido, String identificacion, String celular, String correo) {
-        proveedor.setNombre(nombre);
-        proveedor.setApellido(apellido);
-        proveedor.setIdentificacion(identificacion);
-        proveedor.setCelular(celular);
-        proveedor.setCorreo(correo);
-
         System.out.println("AGREGAR PROVEEDOR :");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BDD");
         EntityManager manager = emf.createEntityManager();
 
         try {
+            Proveedor proveedor = new Proveedor();
+            proveedor.setNombre(nombre);
+            proveedor.setApellido(apellido);
+            proveedor.setIdentificacion(identificacion);
+            proveedor.setCelular(celular);
+            proveedor.setCorreo(correo);
+
             manager.getTransaction().begin();
             manager.persist(proveedor);
             manager.getTransaction().commit();
             System.out.println("PROVEEDOR AGREGADO");
-            manager.close();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en el registro de proveedor: " + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
         return false;
     }
@@ -50,12 +56,15 @@ public class ControladorProveedor {
             manager.getTransaction().begin();
             pro = manager.find(Proveedor.class, idProveedor);
             manager.getTransaction().commit();
-            manager.close();
             return pro;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se encontro ningun proveedor con el id proporcionado. " + e);
-            return pro;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
+        return pro;
     }
 
     public void actualizarProveedor(int idProveedor, String nombre, String apellido, String identificacion, String celular, String correo) {
@@ -65,16 +74,23 @@ public class ControladorProveedor {
         try {
             manager.getTransaction().begin();
             Proveedor pro = manager.find(Proveedor.class, idProveedor);
-            pro.setNombre(nombre);
-            pro.setApellido(apellido);
-            pro.setIdentificacion(identificacion);
-            pro.setCelular(celular);
-            pro.setCorreo(correo);
+            if (pro != null) {
+                pro.setNombre(nombre);
+                pro.setApellido(apellido);
+                pro.setIdentificacion(identificacion);
+                pro.setCelular(celular);
+                pro.setCorreo(correo);
+            }
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar actualizar." + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -85,12 +101,19 @@ public class ControladorProveedor {
         try {
             manager.getTransaction().begin();
             Proveedor pro = manager.find(Proveedor.class, idProveedor);
-            manager.remove(pro);
+            if (pro != null) {
+                manager.remove(pro);
+            }
             manager.getTransaction().commit();
-            manager.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar" + e);
-            manager.getTransaction().rollback();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
     }
 
@@ -99,12 +122,18 @@ public class ControladorProveedor {
         EntityManager manager = emf.createEntityManager();
         List<Proveedor> resultados = null;
         try {
-            resultados = (List<Proveedor>) manager.createQuery("SELECT p FROM Proveedor p").getResultList();
+            manager.getTransaction().begin();
+            resultados = manager.createQuery("SELECT p FROM Proveedor p", Proveedor.class).getResultList();
+            manager.getTransaction().commit();
             return resultados;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al obtener la lista." + e);
-            return resultados;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
+        return resultados;
     }
 
 }

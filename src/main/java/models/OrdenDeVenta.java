@@ -3,12 +3,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,33 +25,34 @@ public class OrdenDeVenta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idOrden", updatable = false, nullable = false, unique = true)
     private int id;
+    
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     private Date fecha_creacion;
+    
     @JoinColumn(name = "idTipoOrden")
     @ManyToOne
     private TipoOrden tipo;
+    
     @JoinColumn(name = "idPuntoDeVenta")
     @ManyToOne
     private PuntoDeVenta punto_de_venta;
-    @ElementCollection
-    @ManyToMany
-    private List<OrdenItem> items;
+    
     @Column(name = "precio_total")
     private double precio_total;
+    
     @JoinColumn(name = "idCliente")
     @ManyToOne
     private Cliente cliente;
     
     public OrdenDeVenta(){}
 
-    public OrdenDeVenta(Date fecha_creacion, List<TipoOrden> tipo, PuntoDeVenta punto_de_venta, List<OrdenItem> items, double precio_total, List<Cliente> cliente) {
+    public OrdenDeVenta(Date fecha_creacion, TipoOrden tipo, PuntoDeVenta punto_de_venta, double precio_total, Cliente cliente) {
         this.fecha_creacion = fecha_creacion;
-        this.tipo = (TipoOrden) tipo;
+        this.tipo = tipo;
         this.punto_de_venta = punto_de_venta;
-        this.items = items;
         this.precio_total = precio_total;
-        this.cliente = (Cliente) cliente;
+        this.cliente = cliente;
     }
 
     public int getId() {
@@ -86,14 +87,6 @@ public class OrdenDeVenta implements Serializable {
         this.punto_de_venta = punto_de_venta;
     }
 
-    public List<OrdenItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrdenItem> items) {
-        this.items = items;
-    }
-
     public double getPrecio_total() {
         return precio_total;
     }
@@ -112,7 +105,7 @@ public class OrdenDeVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "OrdenDeVenta{" + "id=" + id + ", fecha_creacion=" + fecha_creacion + ", tipo=" + tipo + ", punto_de_venta=" + punto_de_venta + ", items=" + items + ", precio_total=" + precio_total + ", cliente=" + cliente + '}';
+        return "OrdenDeVenta{" + "id=" + id + ", fecha_creacion=" + fecha_creacion + ", tipo=" + tipo + ", punto_de_venta=" + punto_de_venta + ", precio_total=" + precio_total + ", cliente=" + cliente + '}';
     }
 
     

@@ -7,6 +7,7 @@ package views;
 import java.awt.Color;
 import models.Usuario;
 import controller.ControladorUsuario;
+import services.PasswordEncryptor;
 
 /**
  *
@@ -14,9 +15,7 @@ import controller.ControladorUsuario;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form intento3
-     */
+    private ControladorUsuario controladorUsuario = new ControladorUsuario();
     public Login() {
         initComponents();
         
@@ -201,15 +200,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ControladorUsuario controlador = new ControladorUsuario();
-        
+
         String usuario = txtUsuario.getText();
         String password = new String(txtPassword.getPassword());
+        PasswordEncryptor pe = new PasswordEncryptor();
+        String encrypted_password = pe.encryptPassword(password);
         
-        
-        if(controlador.validarUsuario(usuario, password)){
+        if(controladorUsuario.validarUsuario(usuario, encrypted_password)){
             this.dispose();
-            menuPrincipal m = new menuPrincipal();
+            Usuario user = controladorUsuario.obtenerUsuarioNombre(usuario, encrypted_password);
+            MenuPrincipal m = new MenuPrincipal(user);
             m.setVisible(true);
         }
         

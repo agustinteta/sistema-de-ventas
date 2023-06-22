@@ -56,7 +56,7 @@ public class TipoOrden implements Serializable {
 
     @Override
     public String toString() {
-        return "TipoOrden{" + "id=" + idTipoOrden + ", nombre=" + nombre + '}';
+        return nombre;
     }
     
     
